@@ -1,0 +1,58 @@
+<form
+  class="form-signin p-3 text-center"
+  [formGroup]="this.registerForm"
+  (ngSubmit)="this.sendForm()"
+>
+  <h1 class="h3 mb-3 font-weight-normal">Registro</h1>
+
+  <!-- Email -->
+  <div class="form-group mb-3">
+    <input
+      autofocus
+      class="form-control"
+      type="email"
+      placeholder="Correo electrónico"
+      formControlName="email"
+    />
+  </div>
+
+  <!-- Password -->
+  <div class="form-group mb-3">
+    <input
+      class="form-control"
+      type="password"
+      placeholder="Contraseña"
+      formControlName="password"
+    />
+  </div>
+
+  <!-- Photo -->
+  <div class="form-group mb-3 custom-file">
+    <input
+      class="form-control"
+      type="file"
+      formControlName="photo"
+      (change)="this.handlePhoto($event)"
+    />
+  </div>
+
+  <!-- Type -->
+  <div class="form-group mb-3">
+    <select class="form-select" formControlName="type">
+      <option value="">Tipo</option>
+      <option [value]="this.types.STUDENT">Alumno</option>
+      <option [value]="this.types.TEACHER">Profesor</option>
+      <option [value]="this.types.ADMIN" *ngIf="this.isAdminRegister">
+        Admin
+      </option>
+    </select>
+  </div>
+
+  <button
+    class="btn btn-primary w-100"
+    type="submit"
+    [disabled]="this.registerForm.invalid"
+  >
+    Unirse
+  </button>
+</form>

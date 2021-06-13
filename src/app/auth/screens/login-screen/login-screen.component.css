@@ -1,0 +1,13 @@
+.wrapper {
+  /* border: 20px solid crimson; */
+  height: 80%;
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+
+.wrapper-controls {
+  border: 1px solid black;
+  width: 100%;
+  max-width: 330px;
+}
