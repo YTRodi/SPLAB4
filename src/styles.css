@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+.blur {
+  background: rgba(187, 187, 187, 0.5);
+  box-shadow: 4px 4px 32px rgba(16, 16, 32, 0.12);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 0.9;
+}
+
+.error {
+  color: crimson;
+}
+
+.border-radius {
+  border-radius: 0.5rem;
+}
+
+.cursor {
+  cursor: pointer;
+  color: #0d6efd;
+  transition: all 0.2s ease-in-out;
+}
+
+.cursor:hover {
+  color: #0b5ed7;
+}

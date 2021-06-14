@@ -2,10 +2,19 @@
   class="
     vh-100
     d-flex
+    flex-column
     justify-content-center
     align-items-center
     background-container
   "
 >
-  <app-register-form></app-register-form>
+  <div class="border-radius blur">
+    <app-register-form></app-register-form>
+    <div class="mb-3 text-center text-white">
+      <small>
+        ¿Ya eres usuario?
+        <b class="cursor" [routerLink]="['/auth/login']">Iniciar sesión</b>
+      </small>
+    </div>
+  </div>
 </div>

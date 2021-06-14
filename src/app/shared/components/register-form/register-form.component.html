@@ -1,9 +1,9 @@
 <form
-  class="form-signin p-3 text-center"
+  class="form-signin p-3"
   [formGroup]="this.registerForm"
   (ngSubmit)="this.sendForm()"
 >
-  <h1 class="h3 mb-3 font-weight-normal">Registro</h1>
+  <h1 class="h3 mb-3 text-white">Registro</h1>
 
   <!-- Email -->
   <div class="form-group mb-3">
@@ -14,6 +14,10 @@
       placeholder="Correo electrónico"
       formControlName="email"
     />
+
+    <div class="form-text error">
+      {{ this.getErrorMessage("email") }}
+    </div>
   </div>
 
   <!-- Password -->
@@ -24,6 +28,10 @@
       placeholder="Contraseña"
       formControlName="password"
     />
+
+    <div class="form-text error">
+      {{ this.getErrorMessage("password") }}
+    </div>
   </div>
 
   <!-- Photo -->
@@ -34,6 +42,10 @@
       formControlName="photo"
       (change)="this.handlePhoto($event)"
     />
+
+    <div class="form-text error">
+      {{ this.getErrorMessage("photo") }}
+    </div>
   </div>
 
   <!-- Type -->
@@ -46,6 +58,10 @@
         Admin
       </option>
     </select>
+
+    <div class="form-text error">
+      {{ this.getErrorMessage("type") }}
+    </div>
   </div>
 
   <button
@@ -53,6 +69,6 @@
     type="submit"
     [disabled]="this.registerForm.invalid"
   >
-    Unirse
+    > Unirse
   </button>
 </form>

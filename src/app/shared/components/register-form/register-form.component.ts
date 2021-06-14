@@ -28,10 +28,19 @@ export class RegisterFormComponent implements OnInit {
     private userService: UserService
   ) {
     this.registerForm = new FormBuilder().group({
-      email: new FormControl('prueba@gmail.com', [Validators.required]),
-      password: new FormControl('123456', [Validators.required]),
+      email: new FormControl('prueba@gmail.com', [
+        Validators.required,
+        Validators.email,
+        Validators.minLength(6),
+        Validators.maxLength(20),
+      ]),
+      password: new FormControl('123456', [
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(20),
+      ]),
       photo: new FormControl('', [Validators.required]),
-      type: new FormControl(this.types.STUDENT, [Validators.required]),
+      type: new FormControl('', [Validators.required]),
     });
   }
 
@@ -39,6 +48,33 @@ export class RegisterFormComponent implements OnInit {
 
   handlePhoto(event: any): void {
     this.photo = event.target.files[0];
+  }
+
+  getErrorMessage(formControlName: string) {
+    if (this.registerForm.get(formControlName)?.touched) {
+      if (this.registerForm.get(formControlName)?.errors?.required)
+        return 'Debes ingresar un valor';
+
+      if (this.registerForm.get(formControlName)?.hasError('minlength')) {
+        return 'Debe de contener 6 caracteres como mínimo';
+      }
+
+      if (this.registerForm.get(formControlName)?.hasError('maxlength'))
+        return 'Debe de contener 20 caracteres como máximo';
+
+      // min - max
+      // if (formControlName === 'age') {
+      //   if (this.registerForm.get(formControlName)?.errors?.min)
+      //     return 'La edad debe ser como mínimo de 1 años';
+      //   else if (this.registerForm.get(formControlName)?.errors?.max)
+      //     return 'La edad debe ser como máximo de 99 años';
+      // }
+
+      if (this.registerForm.get(formControlName)?.hasError('email'))
+        return 'Email no válido';
+    }
+
+    return '';
   }
 
   async sendForm() {
@@ -54,8 +90,9 @@ export class RegisterFormComponent implements OnInit {
         FolderImages.users,
         [this.photo]
       );
+
+      this.registerForm.reset();
     } catch (error) {
-      // Crear componente para los errores.
       errorNotification({ text: error.message });
     }
   }
