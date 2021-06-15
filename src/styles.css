@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+.background-container {
+  background: url(assets/images/class.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .blur {
   background: rgba(187, 187, 187, 0.5);
   box-shadow: 4px 4px 32px rgba(16, 16, 32, 0.12);

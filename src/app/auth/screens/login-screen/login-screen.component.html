@@ -1,39 +1,11 @@
 <div
   class="
-    wrapper
-    text-center
+    vh-100
     d-flex
-    flex-column
     justify-content-center
     align-items-center
+    background-container
   "
 >
-  <h4>Cargar</h4>
-  <div
-    class="wrapper-controls d-flex justify-content-between align-items-center"
-  >
-    <button class="btn btn-primary">Alumno</button>
-    <button class="btn btn-primary">Profesor</button>
-    <button class="btn btn-primary">Admin</button>
-  </div>
-
-  <form class="wrapper-controls mt-5">
-    <h3 class="mb-3">Registro</h3>
-    <div class="form-group">
-      <input
-        class="form-control"
-        type="email"
-        placeholder="Correo electrónico"
-        autofocus
-      />
-    </div>
-
-    <div class="form-group">
-      <input class="form-control" type="password" placeholder="Contraseña" />
-    </div>
-
-    <button class="btn btn-lg btn-primary btn-block" type="submit">
-      Unirse
-    </button>
-  </form>
+  <app-login-form></app-login-form>
 </div>

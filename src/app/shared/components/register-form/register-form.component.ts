@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { UserService } from 'src/app/auth/services/user.service';
 import { FolderImages } from 'src/app/constants/images';
@@ -25,7 +26,8 @@ export class RegisterFormComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {
     this.registerForm = new FormBuilder().group({
       email: new FormControl('prueba@gmail.com', [
@@ -90,6 +92,8 @@ export class RegisterFormComponent implements OnInit {
         FolderImages.users,
         [this.photo]
       );
+
+      this.router.navigate(['protected/home']);
 
       this.registerForm.reset();
     } catch (error) {

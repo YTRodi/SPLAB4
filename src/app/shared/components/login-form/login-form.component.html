@@ -1,0 +1,68 @@
+<div class="p-3 mb-3 blur wrappper">
+  <h2 class="text-start text-white">Carga rápida</h2>
+
+  <div>
+    <button class="btn btn-primary w-100 mb-3" (click)="this.loadStudent()">
+      Alumno
+    </button>
+    <button class="btn btn-primary w-100 mb-3" (click)="this.loadTeacher()">
+      Profesor
+    </button>
+    <button class="btn btn-primary w-100" (click)="this.loadAdmin()">
+      Admin
+    </button>
+  </div>
+</div>
+
+<div class="border-radius blur">
+  <form
+    class="form-signin p-3"
+    [formGroup]="this.loginForm"
+    (ngSubmit)="this.sendForm()"
+  >
+    <h1 class="h3 mb-3 text-white">Iniciar sesión</h1>
+
+    <!-- Email -->
+    <div class="form-group mb-3">
+      <input
+        class="form-control"
+        type="email"
+        placeholder="Correo electrónico"
+        formControlName="email"
+      />
+
+      <div class="form-text error">
+        {{ this.getErrorMessage("email") }}
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group mb-3">
+      <input
+        class="form-control"
+        type="password"
+        placeholder="Contraseña"
+        formControlName="password"
+      />
+
+      <div class="form-text error">
+        {{ this.getErrorMessage("password") }}
+      </div>
+    </div>
+
+    <button
+      class="btn btn-primary w-100"
+      type="submit"
+      [disabled]="this.loginForm.invalid"
+    >
+      Iniciar sesión
+    </button>
+  </form>
+
+  <div class="pb-3 text-center text-white">
+    <small>
+      ¿Eres nuevo?
+      <b class="cursor" [routerLink]="['/auth/register']">Únete ahora</b>
+    </small>
+  </div>
+</div>
