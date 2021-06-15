@@ -30,13 +30,13 @@ export class RegisterFormComponent implements OnInit {
     private router: Router
   ) {
     this.registerForm = new FormBuilder().group({
-      email: new FormControl('prueba@gmail.com', [
+      email: new FormControl('', [
         Validators.required,
         Validators.email,
         Validators.minLength(6),
         Validators.maxLength(20),
       ]),
-      password: new FormControl('123456', [
+      password: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(20),
@@ -82,10 +82,13 @@ export class RegisterFormComponent implements OnInit {
   async sendForm() {
     try {
       const { email, password, photo, type } = this.registerForm.getRawValue();
-      const newUser: User = { email, password, photo, type };
+      const newUser: User = { email, photo, type };
 
       const userCredentials =
-        await this.authService.registerWithEmailAndPassword(newUser);
+        await this.authService.registerWithEmailAndPassword({
+          email,
+          password,
+        });
 
       this.userService.preAddAndUploadImage(
         { ...newUser, userUid: userCredentials.uid },
