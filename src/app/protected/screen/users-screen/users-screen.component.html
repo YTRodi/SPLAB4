@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="py-3 text-center">
+    <h2>Usuarios</h2>
+  </div>
+
+  <div class="row mb-5">
+    <div class="col-md-7 col-lg-6 animate__animated animate__fadeIn">
+      <app-users-table></app-users-table>
+    </div>
+
+    <div class="col-md-5 col-lg-6 animate__animated animate__fadeIn">
+      <app-register-form
+        [isAdminRegister]="true"
+        [isCustomForm]="true"
+        [title]="'Crear usuario administrador'"
+        [submitText]="'Crear usuario'"
+        [visibleSuccessAlert]="true"
+      ></app-register-form>
+    </div>
+  </div>
+
+  <div class="row animate__animated animate__fadeIn">
+    <div class="col"></div>
+    <div class="col-lg-6" style="border: 1px solid black">
+      <h2>DETALLE DEL USUARIO SELECCIONADO</h2>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

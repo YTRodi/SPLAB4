@@ -1,5 +1,5 @@
 <div class="p-3 mb-3 blur wrappper">
-  <h2 class="text-start text-white">Carga rápida</h2>
+  <h2 class="text-start">Carga rápida</h2>
 
   <div>
     <button class="btn btn-primary w-100 mb-3" (click)="this.loadStudent()">
@@ -20,7 +20,7 @@
     [formGroup]="this.loginForm"
     (ngSubmit)="this.sendForm()"
   >
-    <h1 class="h3 mb-3 text-white">Iniciar sesión</h1>
+    <h1 class="h3 mb-3">Iniciar sesión</h1>
 
     <!-- Email -->
     <div class="form-group mb-3">
@@ -59,10 +59,12 @@
     </button>
   </form>
 
-  <div class="pb-3 text-center text-white">
+  <div class="pb-3 text-center">
     <small>
       ¿Eres nuevo?
-      <b class="cursor" [routerLink]="['/auth/register']">Únete ahora</b>
+      <b class="cursor" style="color: #0d6efd" [routerLink]="['/auth/register']"
+        >Únete ahora</b
+      >
     </small>
   </div>
 </div>

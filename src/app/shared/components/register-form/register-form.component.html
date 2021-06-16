@@ -1,14 +1,16 @@
 <form
-  class="form-signup p-3"
+  class="form-signup"
+  [ngClass]="{ 'p-3': !this.isCustomForm }"
   [formGroup]="this.registerForm"
   (ngSubmit)="this.sendForm()"
 >
-  <h1 class="h3 mb-3 text-white">Registro</h1>
+  <h1 class="h3 mb-3" *ngIf="this.titleVisible">
+    {{ this.title }}
+  </h1>
 
   <!-- Email -->
   <div class="form-group mb-3">
     <input
-      autofocus
       class="form-control"
       type="email"
       placeholder="Correo electrónico"
@@ -49,7 +51,7 @@
   </div>
 
   <!-- Type -->
-  <div class="form-group mb-3">
+  <div class="form-group mb-3" *ngIf="!this.isAdminRegister">
     <select class="form-select" formControlName="type">
       <option value="">Tipo</option>
       <option [value]="this.types.STUDENT">Alumno</option>
@@ -69,6 +71,6 @@
     type="submit"
     [disabled]="this.registerForm.invalid"
   >
-    Unirse
+    {{ this.submitText }}
   </button>
 </form>

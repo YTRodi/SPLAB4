@@ -87,7 +87,7 @@ export class LoginFormComponent implements OnInit {
 
       await this.authService.loginWithEmailAndPassword(email, password);
 
-      this.router.navigate(['protected/home']);
+      this.router.navigate(['dashboard']);
 
       this.loginForm.reset();
     } catch (error) {

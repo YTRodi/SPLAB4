@@ -10,7 +10,10 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { UserService } from 'src/app/auth/services/user.service';
 import { FolderImages } from 'src/app/constants/images';
 import { Types } from 'src/app/constants/types';
-import { errorNotification } from 'src/app/helpers/notifications';
+import {
+  errorNotification,
+  successNotification,
+} from 'src/app/helpers/notifications';
 import { User } from 'src/app/interfaces/user.interface';
 
 @Component({
@@ -19,6 +22,11 @@ import { User } from 'src/app/interfaces/user.interface';
   styleUrls: ['./register-form.component.css'],
 })
 export class RegisterFormComponent implements OnInit {
+  @Input() visibleSuccessAlert: boolean = false;
+  @Input() isCustomForm: boolean = false;
+  @Input() titleVisible: boolean = true;
+  @Input() title: string = 'Registro';
+  @Input() submitText: string = 'Unirse';
   @Input() isAdminRegister: boolean = false;
   public registerForm: FormGroup;
   public types = Types;
@@ -46,7 +54,10 @@ export class RegisterFormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.isAdminRegister)
+      this.registerForm.get('type')?.setValue(this.types.ADMIN);
+  }
 
   handlePhoto(event: any): void {
     this.photo = event.target.files[0];
@@ -85,10 +96,13 @@ export class RegisterFormComponent implements OnInit {
       const newUser: User = { email, photo, type };
 
       const userCredentials =
-        await this.authService.registerWithEmailAndPassword({
-          email,
-          password,
-        });
+        await this.authService.registerWithEmailAndPassword(
+          {
+            email,
+            password,
+          },
+          this.isAdminRegister
+        );
 
       this.userService.preAddAndUploadImage(
         { ...newUser, userUid: userCredentials.uid },
@@ -96,7 +110,16 @@ export class RegisterFormComponent implements OnInit {
         [this.photo]
       );
 
-      this.router.navigate(['protected/home']);
+      if (this.visibleSuccessAlert) {
+        successNotification({
+          title: 'Alta de usuario',
+          text: 'El usuario de ha dado de alta exitosamente',
+        });
+      }
+
+      if (!this.isAdminRegister) {
+        this.router.navigate(['dashboard']);
+      }
 
       this.registerForm.reset();
     } catch (error) {

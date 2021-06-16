@@ -25,10 +25,9 @@
 
 .cursor {
   cursor: pointer;
-  color: #0d6efd;
   transition: all 0.2s ease-in-out;
 }
 
 .cursor:hover {
-  color: #0b5ed7;
+  color: #0b5ed7 !important;
 }

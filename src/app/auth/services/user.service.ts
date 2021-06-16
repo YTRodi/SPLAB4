@@ -63,7 +63,12 @@ export class UserService {
       .toPromise();
   }
 
-  public async updateData(user: any) {
+  public async deleteUser(uid: any) {
+    this.itemDoc = this.afs.doc(`users/${uid}`);
+    this.itemDoc.delete();
+  }
+
+  public async updateUserData(user: any) {
     this.itemDoc = this.afs.doc(`users/${user.uid}`);
     this.itemDoc.update(user);
   }
