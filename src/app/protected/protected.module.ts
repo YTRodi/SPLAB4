@@ -13,6 +13,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeScreenComponent } from './screen/home-screen/home-screen.component';
 import { DashboardScreenComponent } from './screen/dashboard-screen/dashboard-screen.component';
 import { UsersScreenComponent } from './screen/users-screen/users-screen.component';
+import { CreateSubjectsScreenComponent } from './screen/create-subjects-screen/create-subjects-screen.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { UsersScreenComponent } from './screen/users-screen/users-screen.compone
     DashboardScreenComponent,
     NavbarComponent,
     UsersScreenComponent,
+    CreateSubjectsScreenComponent,
   ],
   imports: [CommonModule, ProtectedRoutingModule, SharedModule],
 })

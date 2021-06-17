@@ -6,6 +6,7 @@ import { DashboardScreenComponent } from './screen/dashboard-screen/dashboard-sc
 
 // ADMIN
 import { UsersScreenComponent } from './screen/users-screen/users-screen.component';
+import { CreateSubjectsScreenComponent } from './screen/create-subjects-screen/create-subjects-screen.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,10 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardScreenComponent },
       {
         path: 'admin',
-        children: [{ path: 'users', component: UsersScreenComponent }],
+        children: [
+          { path: 'users', component: UsersScreenComponent },
+          { path: 'create-subject', component: CreateSubjectsScreenComponent },
+        ],
       },
     ],
   },
