@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-users-screen',
@@ -13,7 +14,7 @@ export class UsersScreenComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  setSelectedUser(user: any) {
+  setSelectedUser(user: User) {
     this.selectedUser = user;
   }
 }

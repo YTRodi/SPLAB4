@@ -8,6 +8,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { AuthRoutingModule } from '../auth/auth-routing.module';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { UsersTableComponent } from './components/tables/users-table/users-table.component';
+import { UserDetailComponent } from './components/detail/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -15,13 +16,17 @@ import { UsersTableComponent } from './components/tables/users-table/users-table
     LoginFormComponent,
     SpinnerComponent,
     UsersTableComponent,
+    UserDetailComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, AuthRoutingModule],
   exports: [
     RegisterFormComponent,
     LoginFormComponent,
     SpinnerComponent,
+    // Tables
     UsersTableComponent,
+    // Details
+    UserDetailComponent,
   ],
 })
 export class SharedModule {}

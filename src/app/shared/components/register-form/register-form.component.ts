@@ -22,6 +22,10 @@ import { User } from 'src/app/interfaces/user.interface';
   styleUrls: ['./register-form.component.css'],
 })
 export class RegisterFormComponent implements OnInit {
+  // Flags to update user data
+  @Input() editEneabled: boolean = false;
+  @Input() userToEdit: User | null = null;
+
   @Input() visibleSuccessAlert: boolean = false;
   @Input() isCustomForm: boolean = false;
   @Input() titleVisible: boolean = true;
@@ -37,26 +41,44 @@ export class RegisterFormComponent implements OnInit {
     private userService: UserService,
     private router: Router
   ) {
-    this.registerForm = new FormBuilder().group({
-      email: new FormControl('', [
-        Validators.required,
-        Validators.email,
-        Validators.minLength(6),
-        Validators.maxLength(20),
-      ]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(20),
-      ]),
-      photo: new FormControl('', [Validators.required]),
-      type: new FormControl('', [Validators.required]),
-    });
+    this.registerForm = this.getUserForm();
   }
 
   ngOnInit(): void {
     if (this.isAdminRegister)
       this.registerForm.get('type')?.setValue(this.types.ADMIN);
+
+    // if (this.editEneabled) {
+    //   this.registerForm = this.getUserForm(this.userToEdit);
+    //   this.registerForm.get('type')?.setValue(this.userToEdit?.type);
+    // }
+  }
+
+  getUserForm(user: User | null = null) {
+    // console.log(`user`, user);
+    return new FormBuilder().group({
+      email: new FormControl(
+        {
+          value: user ? user.email : 'alumno@gmail.com',
+          disabled: this.editEneabled,
+        },
+        [
+          Validators.required,
+          Validators.email,
+          Validators.minLength(6),
+          Validators.maxLength(20),
+        ]
+      ),
+      password: new FormControl(
+        {
+          value: user ? user.password : '123456',
+          disabled: this.editEneabled,
+        },
+        [Validators.required, Validators.minLength(6), Validators.maxLength(20)]
+      ),
+      photo: new FormControl('', [Validators.required]),
+      type: new FormControl('', [Validators.required]),
+    });
   }
 
   handlePhoto(event: any): void {
@@ -93,7 +115,7 @@ export class RegisterFormComponent implements OnInit {
   async sendForm() {
     try {
       const { email, password, photo, type } = this.registerForm.getRawValue();
-      const newUser: User = { email, photo, type };
+      const newUser: User = { email, password, photo, type };
 
       const userCredentials =
         await this.authService.registerWithEmailAndPassword(

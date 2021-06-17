@@ -20,14 +20,14 @@ export class NavbarComponent implements OnInit {
   public isAdmin: boolean;
 
   public navStudent: Nav[] = [
-    { to: '/auth/register', routeName: 'Mis turnos' },
-    { to: '/auth/register', routeName: 'Solicitar turno' },
-    { to: '/my-profile', routeName: 'Mi Perfil' },
+    // { to: '/auth/register', routeName: 'Mis turnos' },
+    // { to: '/auth/register', routeName: 'Solicitar turno' },
+    // { to: '/my-profile', routeName: 'Mi Perfil' },
   ];
 
   public navTeacher: Nav[] = [
-    { to: '/auth/register', routeName: 'Mis turnos' },
-    { to: '/my-profile', routeName: 'Mi Perfil' },
+    // { to: '/auth/register', routeName: 'Mis turnos' },
+    // { to: '/my-profile', routeName: 'Mi Perfil' },
   ];
 
   public navAdmin: Nav[] = [{ to: '/admin/users', routeName: 'Usuarios' }];

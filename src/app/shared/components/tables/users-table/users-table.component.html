@@ -25,6 +25,7 @@
           item
         "
         *ngFor="let user of this.userList"
+        (click)="this.selectUser(user)"
       >
         <div class="d-flex d-flex justify-content-center align-items-center">
           <img
