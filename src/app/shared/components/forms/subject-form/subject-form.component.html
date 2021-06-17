@@ -1,0 +1,120 @@
+<form
+  class="form-signup"
+  [formGroup]="this.subjectForm"
+  (ngSubmit)="this.sendForm()"
+>
+  <h1 class="h3 mb-3" *ngIf="this.titleVisible">
+    {{ this.title }}
+  </h1>
+
+  <!-- Name -->
+  <div class="form-group mb-3">
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Nombre de la materia"
+      formControlName="name"
+    />
+
+    <div class="form-text error">
+      {{ this.getErrorMessage("name") }}
+    </div>
+  </div>
+
+  <!-- Quarter -->
+  <div class="form-group mb-3" *ngIf="!this.isAdminRegister">
+    <select class="form-select" formControlName="quarter">
+      <option value="">Cuatrimestre</option>
+      <option
+        *ngFor="let quarter of this.quarters | keyvalue: this.originalOrder"
+        [value]="quarter.key"
+      >
+        {{ quarter.value }}
+      </option>
+    </select>
+
+    <div class="form-text error">
+      {{ this.getErrorMessage("type") }}
+    </div>
+  </div>
+
+  <!-- Places -->
+  <div class="form-group mb-3">
+    <input
+      class="form-control"
+      type="number"
+      placeholder="Cupos"
+      formControlName="places"
+      min="10"
+      max="50"
+    />
+
+    <div class="form-text error">
+      {{ this.getErrorMessage("places") }}
+    </div>
+  </div>
+
+  <!-- Age -->
+  <div class="form-group mb-3">
+    <input
+      class="form-control"
+      type="number"
+      placeholder="Año"
+      formControlName="age"
+      min="2020"
+      max="2050"
+    />
+
+    <div class="form-text error">
+      {{ this.getErrorMessage("age") }}
+    </div>
+  </div>
+
+  <!-- Teacher -->
+  <label class="form-label">Profesor</label>
+  <div class="row g-3 mb-3" *ngIf="this.selectedTeacher">
+    <div class="col-4">
+      <img
+        style="border-radius: 50px"
+        alt="User image"
+        [src]="this.selectedTeacher.photo"
+        width="80"
+        height="80"
+      />
+    </div>
+
+    <div class="col-8">
+      <label class="form-label">UID</label>
+      <input
+        type="text"
+        class="form-control"
+        [value]="this.selectedTeacher.uid"
+        disabled
+      />
+
+      <label class="form-label">UID Auth</label>
+      <input
+        type="text"
+        class="form-control"
+        [value]="this.selectedTeacher.userUid"
+        disabled
+      />
+
+      <label class="form-label">Email</label>
+      <input
+        type="text"
+        class="form-control"
+        [value]="this.selectedTeacher.email"
+        disabled
+      />
+    </div>
+  </div>
+
+  <button
+    class="btn btn-primary w-100"
+    type="submit"
+    [disabled]="this.subjectForm.invalid"
+  >
+    {{ this.submitText }}
+  </button>
+</form>

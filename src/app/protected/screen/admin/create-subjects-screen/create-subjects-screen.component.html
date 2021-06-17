@@ -1,1 +1,21 @@
-<p>create-subjects-screen works!</p>
+<div class="container">
+  <div class="py-3 text-center">
+    <h2>Alta de Materias</h2>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-6 col-lg-6 animate__animated animate__fadeIn">
+      <app-users-table
+        [title]="'profesores'"
+        [filter]="'TEACHER'"
+        (onSelectUser)="this.setSelectedTeacher($event)"
+      ></app-users-table>
+    </div>
+
+    <div class="col-md-6 col-lg-6 animate__animated animate__fadeIn">
+      <app-subject-form
+        [selectedTeacher]="this.selectedTeacher"
+      ></app-subject-form>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize, first, map, tap } from 'rxjs/operators';
 import { FolderImages } from 'src/app/constants/images';
+import { Types } from 'src/app/constants/types';
 import { File } from 'src/app/interfaces/file.interface';
 import { User } from 'src/app/interfaces/user.interface';
 // import { Specialist, Admin } from 'src/app/classes/entities';
@@ -37,6 +38,24 @@ export class UserService {
   public getAllUsers(): Observable<any[]> {
     return this.afs
       .collection(this.nameCollectionDB)
+      .snapshotChanges()
+      .pipe(
+        map((actions: any) =>
+          actions.map((a: any) => {
+            const data = a.payload.doc.data() as object;
+            const uid = a.payload.doc.id;
+
+            return { uid, ...data };
+          })
+        )
+      );
+  }
+
+  public async getAllUsersByType(
+    type: 'STUDENT' | 'TEACHER' | 'ADMIN' | 'ALL'
+  ) {
+    return this.afs
+      .collection(this.nameCollectionDB, (ref) => ref.where('type', '==', type))
       .snapshotChanges()
       .pipe(
         map((actions: any) =>

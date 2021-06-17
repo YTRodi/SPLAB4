@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { RegisterFormComponent } from './components/forms/register-form/register-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoginFormComponent } from './components/login-form/login-form.component';
+import { LoginFormComponent } from './components/forms/login-form/login-form.component';
 
 // Auth routing
 import { AuthRoutingModule } from '../auth/auth-routing.module';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { UsersTableComponent } from './components/tables/users-table/users-table.component';
 import { UserDetailComponent } from './components/detail/user-detail/user-detail.component';
+import { SubjectFormComponent } from './components/forms/subject-form/subject-form.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +18,15 @@ import { UserDetailComponent } from './components/detail/user-detail/user-detail
     SpinnerComponent,
     UsersTableComponent,
     UserDetailComponent,
+    SubjectFormComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, AuthRoutingModule],
   exports: [
+    SpinnerComponent,
+    // Forms
     RegisterFormComponent,
     LoginFormComponent,
-    SpinnerComponent,
+    SubjectFormComponent,
     // Tables
     UsersTableComponent,
     // Details

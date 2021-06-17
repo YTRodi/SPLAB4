@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="py-3 text-center">
+    <h2>Alta de Materias</h2>
+  </div>
+
+  <!-- Todo: Mostrar una row con dos col (#1 - lista de materias | #2 - lista de alumnos) -->
+  <div class="row mb-3">
+    <div class="col-md-6 col-lg-6 animate__animated animate__fadeIn">
+      <app-users-table
+        [title]="'profesores'"
+        [filter]="'TEACHER'"
+      ></app-users-table>
+      <!-- (onSelectUser)="this.setSelectedTeacher($event)" -->
+    </div>
+
+    <div class="col-md-6 col-lg-6 animate__animated animate__fadeIn">
+      <app-subject-form></app-subject-form>
+      <!-- [selectedTeacher]="this.selectedTeacher" -->
+    </div>
+  </div>
+
+  <!-- Todo: Mostrar una row con tres col (#1 - col-2 | #2 - donde voy a mostrar la data de la inscripción a la materia | #3 col-2) -->
+  <!-- Todo: (las col-2 son para que el de el medio quede centrado) -->
+</div>

@@ -11,6 +11,8 @@ import { User } from 'src/app/interfaces/user.interface';
   styleUrls: ['./users-table.component.css'],
 })
 export class UsersTableComponent implements OnInit {
+  @Input() title: string = 'usuarios';
+  @Input() filter: 'STUDENT' | 'TEACHER' | 'ADMIN' | 'ALL' = 'ALL';
   @Output() onSelectUser: EventEmitter<User>;
   public currentUserFromDB: User | null = null;
   public types = Types;
@@ -24,9 +26,31 @@ export class UsersTableComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.userService
-      .getAllUsers()
-      .subscribe((userList) => (this.userList = userList));
+    switch (this.filter) {
+      case 'ALL':
+        this.userService
+          .getAllUsers()
+          .subscribe((userList) => (this.userList = userList));
+        break;
+
+      case 'STUDENT':
+        (await this.userService.getAllUsersByType(this.filter)).subscribe(
+          (onlyStudents) => (this.userList = onlyStudents)
+        );
+        break;
+
+      case 'TEACHER':
+        (await this.userService.getAllUsersByType(this.filter)).subscribe(
+          (onlyTeachers) => (this.userList = onlyTeachers)
+        );
+        break;
+
+      case 'ADMIN':
+        (await this.userService.getAllUsersByType(this.filter)).subscribe(
+          (onlyAdmins) => (this.userList = onlyAdmins)
+        );
+        break;
+    }
 
     const { currentUserFromDB } = await this.authService.getCurrentUser();
     this.currentUserFromDB = currentUserFromDB;
@@ -37,11 +61,12 @@ export class UsersTableComponent implements OnInit {
   }
 
   async onDeleteUser(user: User) {
-    const userType = {
-      [Types.STUDENT]: 'alumno',
-      [Types.TEACHER]: 'profesor',
-      [Types.ADMIN]: 'administrador',
-    }[user.type];
+    const userType =
+      user.type === Types.STUDENT
+        ? 'alumno'
+        : user.type === Types.TEACHER
+        ? 'profesor'
+        : 'administrador';
 
     const confirm = await confirmNotification({
       text: `Eliminar ${userType} con email ${user.email}`,

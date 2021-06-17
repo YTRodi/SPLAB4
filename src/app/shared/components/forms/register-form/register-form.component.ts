@@ -59,7 +59,7 @@ export class RegisterFormComponent implements OnInit {
     return new FormBuilder().group({
       email: new FormControl(
         {
-          value: user ? user.email : 'alumno@gmail.com',
+          value: user ? user.email : '',
           disabled: this.editEneabled,
         },
         [
@@ -71,7 +71,7 @@ export class RegisterFormComponent implements OnInit {
       ),
       password: new FormControl(
         {
-          value: user ? user.password : '123456',
+          value: user ? user.password : '',
           disabled: this.editEneabled,
         },
         [Validators.required, Validators.minLength(6), Validators.maxLength(20)]
