@@ -12,8 +12,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 // Screens
 import { HomeScreenComponent } from './screen/home-screen/home-screen.component';
 import { DashboardScreenComponent } from './screen/dashboard-screen/dashboard-screen.component';
-import { UsersScreenComponent } from './screen/users-screen/users-screen.component';
-import { CreateSubjectsScreenComponent } from './screen/create-subjects-screen/create-subjects-screen.component';
+import { UsersScreenComponent } from './screen/admin/users-screen/users-screen.component';
+import { CreateSubjectsScreenComponent } from './screen/admin/create-subjects-screen/create-subjects-screen.component';
 
 @NgModule({
   declarations: [
