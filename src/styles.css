@@ -31,3 +31,12 @@
 .cursor:hover {
   color: #0b5ed7 !important;
 }
+
+.item {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.item:hover {
+  background-color: #e9ecef;
+}

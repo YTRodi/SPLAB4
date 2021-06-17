@@ -10,6 +10,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { UsersTableComponent } from './components/tables/users-table/users-table.component';
 import { UserDetailComponent } from './components/detail/user-detail/user-detail.component';
 import { SubjectFormComponent } from './components/forms/subject-form/subject-form.component';
+import { SubjectsTableComponent } from './components/tables/subjects-table/subjects-table.component';
+import { SubjectDetailComponent } from './components/detail/subject-detail/subject-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { SubjectFormComponent } from './components/forms/subject-form/subject-fo
     UsersTableComponent,
     UserDetailComponent,
     SubjectFormComponent,
+    SubjectsTableComponent,
+    SubjectDetailComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, AuthRoutingModule],
   exports: [
@@ -27,10 +31,13 @@ import { SubjectFormComponent } from './components/forms/subject-form/subject-fo
     RegisterFormComponent,
     LoginFormComponent,
     SubjectFormComponent,
+
     // Tables
     UsersTableComponent,
+    SubjectsTableComponent,
     // Details
     UserDetailComponent,
+    SubjectDetailComponent,
   ],
 })
 export class SharedModule {}

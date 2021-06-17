@@ -1,0 +1,119 @@
+<div class="p-5 text-white bg-dark rounded">
+  <div class="d-flex justify-content-evenly align-items-center mb-3">
+    <!-- <img
+      *ngIf="this.selectedSubject"
+      class="me-3 rounded-circle"
+      [src]="this.selectedSubject?.photo"
+      alt="User image"
+      width="55"
+      height="55"
+    /> -->
+
+    <h3 *ngIf="!this.selectedSubject && !this.selectedUser">
+      Seleccione una materia o elija el alumno a inscribir...
+    </h3>
+
+    <h2 *ngIf="this.selectedSubject || this.selectedUser">
+      Inscripción a materia
+    </h2>
+
+    <img
+      *ngIf="this.selectedUser"
+      class="me-3 rounded-circle"
+      [src]="this.selectedUser?.photo"
+      alt="User image"
+      width="55"
+      height="55"
+    />
+  </div>
+
+  <div class="row" *ngIf="this.selectedSubject || this.selectedUser">
+    <!-- SUBJECT -->
+    <div class="col-md-6 col-lg-6">
+      <div class="form-group mb-3">
+        <label class="form-label">UID Materia</label>
+        <input
+          class="form-control"
+          type="text"
+          disabled
+          [value]="this.selectedSubject?.uid"
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Nombre de la materia</label>
+        <input
+          class="form-control"
+          type="text"
+          disabled
+          [value]="this.selectedSubject?.name"
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Cupos disponibles</label>
+        <input
+          class="form-control"
+          type="text"
+          disabled
+          [value]="this.selectedSubject?.places"
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Cuatrimestre</label>
+        <input
+          class="form-control"
+          type="text"
+          disabled
+          [value]="this.selectedSubject?.quarter"
+        />
+      </div>
+    </div>
+
+    <!-- USER -->
+    <div class="col-md-6 col-lg-6">
+      <div class="form-group mb-3">
+        <label class="form-label">UID</label>
+        <input
+          class="form-control"
+          type="text"
+          disabled
+          [value]="this.selectedUser?.uid"
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">UID Auth</label>
+        <input
+          class="form-control"
+          type="text"
+          disabled
+          [value]="this.selectedUser?.userUid"
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Email usuario</label>
+        <input
+          class="form-control"
+          type="text"
+          disabled
+          [value]="this.selectedUser?.email"
+        />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label text-dark">Submit button</label>
+        <button
+          type="submit"
+          class="btn btn-primary w-100"
+          [disabled]="!this.selectedSubject || !this.selectedUser"
+          (click)="this.onSaveInscription()"
+        >
+          Inscribir
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

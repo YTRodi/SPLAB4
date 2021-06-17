@@ -27,6 +27,7 @@ export class SubjectService {
     this.subjectsCollection = afs.collection<any>(this.nameCollectionDB);
   }
 
+  // SUBJECTS
   public getAllSubjects(): Observable<any[]> {
     return this.afs
       .collection(this.nameCollectionDB)

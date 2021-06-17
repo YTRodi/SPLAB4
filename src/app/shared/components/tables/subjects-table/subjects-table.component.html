@@ -1,0 +1,68 @@
+<app-spinner
+  [isLoading]="!this.subjectsList"
+  [text]="'Cargando lista de usuarios'"
+></app-spinner>
+
+<div class="mb-3 animate__animated animate__fadeIn" *ngIf="this.subjectsList">
+  <h4 class="d-flex justify-content-between align-items-center mb-3">
+    <span class="text-primary">Lista de {{ this.title }}</span>
+    <span class="badge bg-primary rounded-pill">{{
+      this.subjectsList.length
+    }}</span>
+  </h4>
+
+  <!-- <div>Checkboxs para los filtros</div> -->
+
+  <div class="overflow-auto" style="height: 275px">
+    <ul class="list-group">
+      <li
+        class="
+          list-group-item
+          d-flex
+          justify-content-between
+          align-items-center
+          rounded
+          item
+        "
+        *ngFor="let subject of this.subjectsList"
+        (click)="this.selectSubject(subject)"
+      >
+        <div class="d-flex d-flex justify-content-center align-items-center">
+          <!-- <img
+            class="me-3 rounded-circle"
+            [src]="subject.photo"
+            alt="User image"
+            width="55"
+            height="55"
+          /> -->
+
+          <div>
+            <small class="text-muted">UID {{ subject.uid }}</small>
+            <h6 class="my-0">
+              {{ subject.name }} - {{ this.transformQuarter(subject.quarter) }}
+            </h6>
+            <small class="text-muted">
+              {{ subject.places }} cupos disponibles
+            </small>
+          </div>
+        </div>
+
+        <span class="text-muted">
+          <button
+            class="btn btn-outline-danger"
+            (click)="this.onDeleteSubject(subject)"
+          >
+            x
+          </button>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- <form class="card p-2">
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="Promo code" />
+    <button type="submit" class="btn btn-secondary">Redeem</button>
+  </div>
+</form> -->
