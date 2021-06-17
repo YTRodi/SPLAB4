@@ -9,25 +9,16 @@
       height="55"
     /> -->
 
-    <h3 *ngIf="!this.selectedSubject && !this.selectedUser">
+    <h3 *ngIf="!this.selectedSubject && !this.selectedsUsers.length">
       Seleccione una materia o elija el alumno a inscribir...
     </h3>
 
-    <h2 *ngIf="this.selectedSubject || this.selectedUser">
+    <h2 *ngIf="this.selectedSubject || this.selectedsUsers.length">
       Inscripción a materia
     </h2>
-
-    <img
-      *ngIf="this.selectedUser"
-      class="me-3 rounded-circle"
-      [src]="this.selectedUser?.photo"
-      alt="User image"
-      width="55"
-      height="55"
-    />
   </div>
 
-  <div class="row" *ngIf="this.selectedSubject || this.selectedUser">
+  <div class="row" *ngIf="this.selectedSubject || this.selectedsUsers.length">
     <!-- SUBJECT -->
     <div class="col-md-6 col-lg-6">
       <div class="form-group mb-3">
@@ -72,48 +63,46 @@
     </div>
 
     <!-- USER -->
-    <div class="col-md-6 col-lg-6">
-      <div class="form-group mb-3">
-        <label class="form-label">UID</label>
-        <input
-          class="form-control"
-          type="text"
-          disabled
-          [value]="this.selectedUser?.uid"
-        />
-      </div>
+    <div
+      class="col-md-6 col-lg-6 text-center"
+      *ngIf="!this.selectedsUsers.length"
+    >
+      <h6>Lista de alumnos</h6>
+    </div>
 
-      <div class="form-group mb-3">
-        <label class="form-label">UID Auth</label>
-        <input
-          class="form-control"
-          type="text"
-          disabled
-          [value]="this.selectedUser?.userUid"
-        />
-      </div>
-
-      <div class="form-group mb-3">
-        <label class="form-label">Email usuario</label>
-        <input
-          class="form-control"
-          type="text"
-          disabled
-          [value]="this.selectedUser?.email"
-        />
-      </div>
-
-      <div class="form-group mb-3">
-        <label class="form-label text-dark">Submit button</label>
-        <button
-          type="submit"
-          class="btn btn-primary w-100"
-          [disabled]="!this.selectedSubject || !this.selectedUser"
-          (click)="this.onSaveInscription()"
-        >
-          Inscribir
-        </button>
+    <div class="col-md-6 col-lg-6" *ngIf="this.selectedsUsers.length">
+      <div class="row">
+        <div class="col-4" *ngFor="let user of this.selectedsUsers">
+          <button
+            class="badge btn-danger rounded-circle"
+            style="cursor: pointer"
+            (click)="this.onRemoveUser(user)"
+          >
+            x
+          </button>
+          <img
+            class="me-3 rounded-circle mb-3"
+            [src]="user?.photo"
+            alt="User image"
+            width="70"
+            height="70"
+          />
+        </div>
       </div>
     </div>
+  </div>
+
+  <div
+    class="row px-2 mt-1"
+    *ngIf="this.selectedSubject || this.selectedsUsers.length"
+  >
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="!this.selectedsUsers.length || !this.selectedSubject"
+      (click)="this.onSaveInscription()"
+    >
+      Inscribir
+    </button>
   </div>
 </div>

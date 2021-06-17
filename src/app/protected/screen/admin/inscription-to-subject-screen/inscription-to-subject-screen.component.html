@@ -21,13 +21,12 @@
   </div>
 
   <div class="row mb-5 animate__animated animate__fadeIn">
-    <!-- *ngIf="this.selectedSubject" -->
-
     <div class="col"></div>
     <div class="col-lg-8">
       <app-subject-detail
-        [selectedUser]="this.selectedStudent"
+        [selectedsUsers]="this.selectedsStudents"
         [selectedSubject]="this.selectedSubject"
+        (onRemoveUserInList)="this.removeUserInArray($event)"
       ></app-subject-detail>
     </div>
     <div class="col"></div>

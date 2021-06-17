@@ -7,4 +7,5 @@ export interface Subject {
   places: number;
   age: number;
   teacher: User;
+  students: Array<User>;
 }

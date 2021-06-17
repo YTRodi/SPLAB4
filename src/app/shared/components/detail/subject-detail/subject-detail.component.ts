@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   errorNotification,
   successNotification,
@@ -15,24 +15,33 @@ import { SubjectService } from 'src/app/protected/services/subject.service';
   styleUrls: ['./subject-detail.component.css'],
 })
 export class SubjectDetailComponent implements OnInit {
+  @Input() selectedsUsers: Array<User> = [];
   @Input() selectedSubject: Subject | null;
-  @Input() selectedUser: User | null;
+  @Output() onRemoveUserInList: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private inscriptionService: InscriptionService,
     private subjectService: SubjectService
   ) {
     this.selectedSubject = null;
-    this.selectedUser = null;
+    // this.onRemoveUserInList = new EventEmitter<any>();
   }
 
   ngOnInit(): void {}
 
+  onRemoveUser(user: User) {
+    const filteredArray = this.selectedsUsers.filter(
+      (userInArray) => userInArray.uid !== user.uid
+    );
+
+    this.onRemoveUserInList.emit(filteredArray);
+  }
+
   onSaveInscription(): any {
-    if (!this.selectedUser) {
+    if (!this.selectedsUsers.length) {
       return errorNotification({
-        title: 'No hay un usuario seleccionado',
-        text: 'Debe de seleccionar uno para poder inscribirlo',
+        title: 'No hay un ningún alumno seleccionado',
+        text: 'Debe de seleccionar uno para poder hacer la inscripción',
       });
     }
 
@@ -43,14 +52,24 @@ export class SubjectDetailComponent implements OnInit {
       });
     }
 
+    const totalStudents = this.selectedsUsers.length - 1;
+    if (totalStudents > this.selectedSubject.places) {
+      const exceedPlaces = this.selectedSubject.places - totalStudents;
+
+      return errorNotification({
+        title: 'No hay cupos para tantos alumnos',
+        text: `Cupos disponibles: ${this.selectedSubject.places}. Se excedió ${exceedPlaces}`,
+      });
+    }
+
     const newInscription: Inscription = {
-      student: this.selectedUser,
+      students: this.selectedsUsers,
       subject: this.selectedSubject,
     };
 
     const updatedSubject: Subject = {
       ...this.selectedSubject,
-      places: this.selectedSubject.places - 1,
+      places: this.selectedSubject.places - (this.selectedsUsers.length - 1),
     };
 
     this.inscriptionService.addInscription(newInscription);
@@ -58,7 +77,7 @@ export class SubjectDetailComponent implements OnInit {
 
     successNotification({ text: 'La inscripción fue exitosa' });
 
+    this.selectedsUsers = [];
     this.selectedSubject = null;
-    this.selectedUser = null;
   }
 }

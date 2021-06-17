@@ -51,18 +51,18 @@ export class SubjectFormComponent implements OnInit {
   getSubjectForm(subject: Subject | null = null) {
     // console.log(`subject`, subject);
     return new FormBuilder().group({
-      name: new FormControl('laboratorio 4', [
+      name: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(20),
       ]),
       quarter: new FormControl('', [Validators.required]),
-      places: new FormControl(10, [
+      places: new FormControl(null, [
         Validators.required,
         Validators.min(10),
         Validators.max(60),
       ]),
-      age: new FormControl(2020, [
+      age: new FormControl(null, [
         Validators.required,
         Validators.min(2020),
         Validators.max(2050),
@@ -114,6 +114,7 @@ export class SubjectFormComponent implements OnInit {
         places,
         age,
         teacher: this.selectedTeacher,
+        students: [],
       };
       const result = await this.subjectService.addSubject(newSubject);
 

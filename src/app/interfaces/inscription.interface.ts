@@ -2,7 +2,7 @@ import { User } from './user.interface';
 import { Subject } from './subject.interface';
 
 export interface Inscription {
-  student: User;
+  students: Array<User>;
   subject: Subject;
   createdAt?: string;
 }
