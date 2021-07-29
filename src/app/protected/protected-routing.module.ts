@@ -8,6 +8,8 @@ import { DashboardScreenComponent } from './screen/dashboard-screen/dashboard-sc
 import { UsersScreenComponent } from './screen/admin/users-screen/users-screen.component';
 import { CreateSubjectsScreenComponent } from './screen/admin/create-subjects-screen/create-subjects-screen.component';
 import { InscriptionToSubjectScreenComponent } from './screen/admin/inscription-to-subject-screen/inscription-to-subject-screen.component';
+import { ListSubjectsComponent } from './screen/admin/list-subjects/list-subjects.component';
+import { ListUsersComponent } from './screen/admin/list-users/list-users.component';
 
 const routes: Routes = [
   {
@@ -24,6 +26,8 @@ const routes: Routes = [
             path: 'incription-to-subject',
             component: InscriptionToSubjectScreenComponent,
           },
+          { path: 'list-of-subjects', component: ListSubjectsComponent },
+          { path: 'list-of-users', component: ListUsersComponent },
         ],
       },
     ],

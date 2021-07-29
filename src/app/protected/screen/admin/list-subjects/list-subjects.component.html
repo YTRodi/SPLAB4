@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="py-3 text-center">
+    <h2>Lista de materias</h2>
+  </div>
+
+  <div class="row mb-3">
+    <div class="animate__animated animate__fadeIn">
+      <app-subjects-table
+        [title]="'materias'"
+        (onSelectSubject)="this.setSelectedSubject($event)"
+      ></app-subjects-table>
+    </div>
+  </div>
+
+  <div class="row mb-3 text-center" *ngIf="!this.selectedSubject">
+    <h4>Seleccione una materia para ver a los alumnos inscriptos!</h4>
+  </div>
+
+  <div class="row mb-3" *ngIf="this.selectedSubject">
+    <div class="animate__animated animate__fadeIn">
+      <app-users-table
+        [filter]="'STUDENT'"
+        [title]="this.getTitleUsersTable()"
+        [studentsBySubject]="this.selectedSubject"
+      >
+      </app-users-table>
+    </div>
+  </div>
+</div>

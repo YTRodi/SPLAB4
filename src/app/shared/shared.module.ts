@@ -12,6 +12,7 @@ import { UserDetailComponent } from './components/detail/user-detail/user-detail
 import { SubjectFormComponent } from './components/forms/subject-form/subject-form.component';
 import { SubjectsTableComponent } from './components/tables/subjects-table/subjects-table.component';
 import { SubjectDetailComponent } from './components/detail/subject-detail/subject-detail.component';
+import { EmptyCardComponent } from './components/cards/empty-card/empty-card.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SubjectDetailComponent } from './components/detail/subject-detail/subje
     SubjectFormComponent,
     SubjectsTableComponent,
     SubjectDetailComponent,
+    EmptyCardComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, AuthRoutingModule],
   exports: [
@@ -38,6 +40,9 @@ import { SubjectDetailComponent } from './components/detail/subject-detail/subje
     // Details
     UserDetailComponent,
     SubjectDetailComponent,
+
+    //Cards,
+    EmptyCardComponent,
   ],
 })
 export class SharedModule {}

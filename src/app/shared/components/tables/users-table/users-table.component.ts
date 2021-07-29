@@ -1,8 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { UserService } from 'src/app/auth/services/user.service';
 import { Types } from 'src/app/constants/types';
 import { confirmNotification } from 'src/app/helpers/notifications';
+import { Subject } from 'src/app/interfaces/subject.interface';
 import { User } from 'src/app/interfaces/user.interface';
 
 @Component({
@@ -10,7 +19,8 @@ import { User } from 'src/app/interfaces/user.interface';
   templateUrl: './users-table.component.html',
   styleUrls: ['./users-table.component.css'],
 })
-export class UsersTableComponent implements OnInit {
+export class UsersTableComponent implements OnInit, OnChanges {
+  @Input() studentsBySubject: Subject | null = null;
   @Input() title: string = 'usuarios';
   @Input() filter: 'STUDENT' | 'TEACHER' | 'ADMIN' | 'ALL' = 'ALL';
   @Output() onSelectUser: EventEmitter<User>;
@@ -54,6 +64,16 @@ export class UsersTableComponent implements OnInit {
 
     const { currentUserFromDB } = await this.authService.getCurrentUser();
     this.currentUserFromDB = currentUserFromDB;
+  }
+
+  async ngOnChanges(changes: SimpleChanges): Promise<void> {
+    if (changes.studentsBySubject && changes.studentsBySubject.currentValue) {
+      return (this.userList = changes.studentsBySubject.currentValue.students);
+    }
+  }
+
+  getTitleEmptyCardBystudentsBySubjectFilter() {
+    return `No hay alumnos inscriptos a ${this.studentsBySubject?.name}`;
   }
 
   selectUser(selectedUser: User) {

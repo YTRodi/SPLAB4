@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="py-3 text-center">
+    <h2>Lista de usuarios</h2>
+  </div>
+
+  <div class="row mb-3">
+    <div class="animate__animated animate__fadeIn">
+      <!-- TODO: Falta filtro por PIPE, puedo ir cambiar el parámetro [filter] con el pipe? -->
+      <app-users-table [filter]="'ALL'" [title]="'usuarios'"> </app-users-table>
+    </div>
+  </div>
+</div>

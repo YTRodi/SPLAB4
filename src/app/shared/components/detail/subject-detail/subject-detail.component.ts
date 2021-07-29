@@ -3,10 +3,8 @@ import {
   errorNotification,
   successNotification,
 } from 'src/app/helpers/notifications';
-import { Inscription } from 'src/app/interfaces/inscription.interface';
 import { Subject } from 'src/app/interfaces/subject.interface';
 import { User } from 'src/app/interfaces/user.interface';
-import { InscriptionService } from 'src/app/protected/services/inscription.service';
 import { SubjectService } from 'src/app/protected/services/subject.service';
 
 @Component({
@@ -19,12 +17,8 @@ export class SubjectDetailComponent implements OnInit {
   @Input() selectedSubject: Subject | null;
   @Output() onRemoveUserInList: EventEmitter<any> = new EventEmitter();
 
-  constructor(
-    private inscriptionService: InscriptionService,
-    private subjectService: SubjectService
-  ) {
+  constructor(private subjectService: SubjectService) {
     this.selectedSubject = null;
-    // this.onRemoveUserInList = new EventEmitter<any>();
   }
 
   ngOnInit(): void {}
@@ -52,29 +46,39 @@ export class SubjectDetailComponent implements OnInit {
       });
     }
 
-    const totalStudents = this.selectedsUsers.length - 1;
-    if (totalStudents > this.selectedSubject.places) {
-      const exceedPlaces = this.selectedSubject.places - totalStudents;
+    const studentExists = this.selectedSubject.students.find(
+      (studentInSubject: User): any => {
+        for (const studentSelected of this.selectedsUsers) {
+          if (studentSelected.email === studentInSubject.email) {
+            return true;
+          }
+        }
+      }
+    );
 
+    if (studentExists) {
       return errorNotification({
-        title: 'No hay cupos para tantos alumnos',
-        text: `Cupos disponibles: ${this.selectedSubject.places}. Se excedió ${exceedPlaces}`,
+        title: 'Alumno ya inscripto',
+        text: `El alumno con el email: ${studentExists.email} ya está inscripto a ${this.selectedSubject.name}`,
       });
     }
 
-    const newInscription: Inscription = {
-      students: this.selectedsUsers,
-      subject: this.selectedSubject,
-    };
+    const totalStudents = this.selectedsUsers.length;
+
+    if (totalStudents > this.selectedSubject.places) {
+      return errorNotification({
+        title: 'No hay cupos para tantos alumnos',
+        text: `Cupos disponibles: ${this.selectedSubject.places}`,
+      });
+    }
 
     const updatedSubject: Subject = {
       ...this.selectedSubject,
-      places: this.selectedSubject.places - (this.selectedsUsers.length - 1),
+      places: this.selectedSubject.places - this.selectedsUsers.length,
+      students: [...this.selectedSubject.students, ...this.selectedsUsers],
     };
 
-    this.inscriptionService.addInscription(newInscription);
     this.subjectService.updateSubjectData(updatedSubject);
-
     successNotification({ text: 'La inscripción fue exitosa' });
 
     this.selectedsUsers = [];

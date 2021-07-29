@@ -15,6 +15,8 @@ import { DashboardScreenComponent } from './screen/dashboard-screen/dashboard-sc
 import { UsersScreenComponent } from './screen/admin/users-screen/users-screen.component';
 import { CreateSubjectsScreenComponent } from './screen/admin/create-subjects-screen/create-subjects-screen.component';
 import { InscriptionToSubjectScreenComponent } from './screen/admin/inscription-to-subject-screen/inscription-to-subject-screen.component';
+import { ListSubjectsComponent } from './screen/admin/list-subjects/list-subjects.component';
+import { ListUsersComponent } from './screen/admin/list-users/list-users.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { InscriptionToSubjectScreenComponent } from './screen/admin/inscription-
     UsersScreenComponent,
     CreateSubjectsScreenComponent,
     InscriptionToSubjectScreenComponent,
+    ListSubjectsComponent,
+    ListUsersComponent,
   ],
   imports: [CommonModule, ProtectedRoutingModule, SharedModule],
 })

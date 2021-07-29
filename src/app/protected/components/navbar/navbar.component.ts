@@ -30,7 +30,13 @@ export class NavbarComponent implements OnInit {
     // { to: '/my-profile', routeName: 'Mi Perfil' },
   ];
 
-  public navAdmin: Nav[] = [{ to: '/admin/users', routeName: 'Usuarios' }];
+  public navAdmin: Nav[] = [
+    { to: '/admin/users', routeName: 'Usuarios' },
+    { to: '/admin/create-subject', routeName: 'Alta de materia' },
+    { to: '/admin/incription-to-subject', routeName: 'Incripción a materias' },
+    { to: '/admin/list-of-subjects', routeName: 'Lista de materias' },
+    { to: '/admin/list-of-users', routeName: 'Lista de usuarios' },
+  ];
 
   constructor(public authService: AuthService, private router: Router) {
     this.currentUser = null;

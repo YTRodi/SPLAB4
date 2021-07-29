@@ -3,7 +3,10 @@
   [text]="'Cargando lista de materias'"
 ></app-spinner>
 
-<h6 class="text-center" *ngIf="!this.subjectsList?.length">
+<h6
+  class="text-center"
+  *ngIf="this.subjectsList && this.subjectsList.length === 0"
+>
   No hay materias, probá dando de alta una
   <span class="cursor text-primary" [routerLink]="['/admin/create-subject']">
     aquí

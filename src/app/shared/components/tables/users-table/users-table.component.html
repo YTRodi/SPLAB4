@@ -3,6 +3,20 @@
   [text]="'Cargando lista de usuarios'"
 ></app-spinner>
 
+<app-empty-card
+  *ngIf="this.userList && !this.studentsBySubject && this.userList.length === 0"
+  [text]="'No hay usuarios'"
+  [icon]="'USER'"
+>
+</app-empty-card>
+
+<app-empty-card
+  *ngIf="this.userList && this.studentsBySubject && this.userList.length === 0"
+  [text]="this.getTitleEmptyCardBystudentsBySubjectFilter()"
+  [icon]="'USER'"
+>
+</app-empty-card>
+
 <div
   class="mb-3 animate__animated animate__fadeIn"
   *ngIf="this.userList?.length"
