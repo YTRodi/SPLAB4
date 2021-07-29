@@ -11,12 +11,17 @@ import { InscriptionToSubjectScreenComponent } from './screen/admin/inscription-
 import { ListSubjectsComponent } from './screen/admin/list-subjects/list-subjects.component';
 import { ListUsersComponent } from './screen/admin/list-users/list-users.component';
 
+// STUDENT
+import { StudentInscriptionToSubjectScreenComponent } from './screen/student/student-inscription-to-subject-screen/student-inscription-to-subject-screen.component';
+import { MySubjectsScreenComponent } from './screen/student/my-subjects-screen/my-subjects-screen.component';
+
 const routes: Routes = [
   {
     path: '',
     component: HomeScreenComponent,
     children: [
       { path: 'dashboard', component: DashboardScreenComponent },
+
       {
         path: 'admin',
         children: [
@@ -28,6 +33,16 @@ const routes: Routes = [
           },
           { path: 'list-of-subjects', component: ListSubjectsComponent },
           { path: 'list-of-users', component: ListUsersComponent },
+        ],
+      },
+      {
+        path: 'student',
+        children: [
+          {
+            path: 'incription-to-subject',
+            component: StudentInscriptionToSubjectScreenComponent,
+          },
+          { path: 'my-subjects', component: MySubjectsScreenComponent },
         ],
       },
     ],

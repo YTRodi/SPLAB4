@@ -17,6 +17,8 @@ import { CreateSubjectsScreenComponent } from './screen/admin/create-subjects-sc
 import { InscriptionToSubjectScreenComponent } from './screen/admin/inscription-to-subject-screen/inscription-to-subject-screen.component';
 import { ListSubjectsComponent } from './screen/admin/list-subjects/list-subjects.component';
 import { ListUsersComponent } from './screen/admin/list-users/list-users.component';
+import { StudentInscriptionToSubjectScreenComponent } from './screen/student/student-inscription-to-subject-screen/student-inscription-to-subject-screen.component';
+import { MySubjectsScreenComponent } from './screen/student/my-subjects-screen/my-subjects-screen.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { ListUsersComponent } from './screen/admin/list-users/list-users.compone
     InscriptionToSubjectScreenComponent,
     ListSubjectsComponent,
     ListUsersComponent,
+    StudentInscriptionToSubjectScreenComponent,
+    MySubjectsScreenComponent,
   ],
   imports: [CommonModule, ProtectedRoutingModule, SharedModule],
 })

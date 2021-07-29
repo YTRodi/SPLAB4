@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="py-3 text-center">
+    <h2>Incripción a materia</h2>
+  </div>
+
+  <div class="row mb-3">
+    <div class="animate__animated animate__fadeIn">
+      <app-subjects-table
+        [title]="'materias'"
+        (onSelectSubject)="this.setSelectedSubject($event)"
+      ></app-subjects-table>
+    </div>
+  </div>
+
+  <div class="row mb-5 animate__animated animate__fadeIn">
+    <div class="col"></div>
+    <div class="col-lg-8">
+      <app-subject-detail
+        [showStudentsList]="false"
+        [selectedSubject]="this.selectedSubject"
+        [studentToInscription]="this.currentUserFromDB"
+      ></app-subject-detail>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

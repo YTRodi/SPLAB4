@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { finalize, first, map, tap } from 'rxjs/operators';
 import { FolderImages } from 'src/app/constants/images';
 import { Subject } from 'src/app/interfaces/subject.interface';
+import { User } from 'src/app/interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +32,24 @@ export class SubjectService {
   public getAllSubjects(): Observable<any[]> {
     return this.afs
       .collection(this.nameCollectionDB)
+      .snapshotChanges()
+      .pipe(
+        map((actions: any) =>
+          actions.map((a: any) => {
+            const data = a.payload.doc.data() as object;
+            const uid = a.payload.doc.id;
+
+            return { uid, ...data };
+          })
+        )
+      );
+  }
+
+  public async getSubjectsByStudent(student: User) {
+    return this.afs
+      .collection(this.nameCollectionDB, (ref) =>
+        ref.where('students', 'array-contains', student)
+      )
       .snapshotChanges()
       .pipe(
         map((actions: any) =>

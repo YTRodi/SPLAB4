@@ -1,7 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Quarters } from 'src/app/constants/quarter';
 import { confirmNotification } from 'src/app/helpers/notifications';
 import { Subject } from 'src/app/interfaces/subject.interface';
+import { User } from 'src/app/interfaces/user.interface';
 import { SubjectService } from 'src/app/protected/services/subject.service';
 
 @Component({
@@ -9,7 +18,8 @@ import { SubjectService } from 'src/app/protected/services/subject.service';
   templateUrl: './subjects-table.component.html',
   styleUrls: ['./subjects-table.component.css'],
 })
-export class SubjectsTableComponent implements OnInit {
+export class SubjectsTableComponent implements OnInit, OnChanges {
+  @Input() subjectsByStudentParams: User | null = null;
   @Input() title: string = 'usuarios';
   // @Input() filter: 'STUDENT' | 'TEACHER' | 'ADMIN' | 'ALL' = 'ALL';
   @Output() onSelectSubject: EventEmitter<Subject>;
@@ -19,10 +29,26 @@ export class SubjectsTableComponent implements OnInit {
     this.onSelectSubject = new EventEmitter<Subject>();
   }
 
-  ngOnInit(): void {
+  ngOnInit(): any {
     this.subjectService
       .getAllSubjects()
       .subscribe((subjectsList) => (this.subjectsList = subjectsList));
+  }
+
+  async ngOnChanges(changes: SimpleChanges): Promise<any> {
+    if (changes.subjectsByStudentParams) {
+      this.subjectService
+        .getAllSubjects()
+        .subscribe((subjectsList: Subject[]) => {
+          const student = changes.subjectsByStudentParams.currentValue as User;
+
+          this.subjectsList = subjectsList.filter((subject: Subject) => {
+            return subject.students.some(
+              (studentInSubject) => studentInSubject.email === student.email
+            );
+          });
+        });
+    }
   }
 
   selectSubject(selectedSubject: Subject) {

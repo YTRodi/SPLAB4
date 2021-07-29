@@ -20,7 +20,7 @@
 
   <div class="row" *ngIf="this.selectedSubject || this.selectedsUsers.length">
     <!-- SUBJECT -->
-    <div class="col-md-6 col-lg-6">
+    <div [ngClass]="{ 'col-md-6 col-lg-6': this.showStudentsList }">
       <div class="form-group mb-3">
         <label class="form-label">UID Materia</label>
         <input
@@ -65,7 +65,7 @@
     <!-- USER -->
     <div
       class="col-md-6 col-lg-6 text-center"
-      *ngIf="!this.selectedsUsers.length"
+      *ngIf="this.showStudentsList && !this.selectedsUsers.length"
     >
       <h6>Lista de alumnos</h6>
     </div>
@@ -99,7 +99,11 @@
     <button
       type="submit"
       class="btn btn-primary"
-      [disabled]="!this.selectedsUsers.length || !this.selectedSubject"
+      [disabled]="
+        this.studentToInscription
+          ? false
+          : !this.selectedsUsers.length || !this.selectedSubject
+      "
       (click)="this.onSaveInscription()"
     >
       Inscribir
