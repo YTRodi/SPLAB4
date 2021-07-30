@@ -20,6 +20,7 @@ import { SubjectService } from 'src/app/protected/services/subject.service';
 })
 export class SubjectsTableComponent implements OnInit, OnChanges {
   @Input() subjectsByStudentParams: User | null = null;
+  @Input() subjectsByTeacherParams: User | null = null;
   @Input() title: string = 'usuarios';
   // @Input() filter: 'STUDENT' | 'TEACHER' | 'ADMIN' | 'ALL' = 'ALL';
   @Output() onSelectSubject: EventEmitter<Subject>;
@@ -36,7 +37,10 @@ export class SubjectsTableComponent implements OnInit, OnChanges {
   }
 
   async ngOnChanges(changes: SimpleChanges): Promise<any> {
-    if (changes.subjectsByStudentParams) {
+    if (
+      changes.subjectsByStudentParams &&
+      changes.subjectsByStudentParams.currentValue
+    ) {
       this.subjectService
         .getAllSubjects()
         .subscribe((subjectsList: Subject[]) => {
@@ -48,6 +52,19 @@ export class SubjectsTableComponent implements OnInit, OnChanges {
             );
           });
         });
+    }
+
+    if (
+      changes.subjectsByTeacherParams &&
+      changes.subjectsByTeacherParams.currentValue
+    ) {
+      const result = await this.subjectService.getSubjectsByTeacherEmail(
+        changes.subjectsByTeacherParams.currentValue.email
+      );
+
+      return result.subscribe((subjects: Subject[]) => {
+        this.subjectsList = subjects;
+      });
     }
   }
 

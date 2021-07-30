@@ -45,10 +45,10 @@ export class SubjectService {
       );
   }
 
-  public async getSubjectsByStudent(student: User) {
+  public async getSubjectsByTeacherEmail(teacherEmail: string) {
     return this.afs
       .collection(this.nameCollectionDB, (ref) =>
-        ref.where('students', 'array-contains', student)
+        ref.where('teacher.email', '==', teacherEmail)
       )
       .snapshotChanges()
       .pipe(

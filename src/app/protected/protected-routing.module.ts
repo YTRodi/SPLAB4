@@ -15,6 +15,9 @@ import { ListUsersComponent } from './screen/admin/list-users/list-users.compone
 import { StudentInscriptionToSubjectScreenComponent } from './screen/student/student-inscription-to-subject-screen/student-inscription-to-subject-screen.component';
 import { MySubjectsScreenComponent } from './screen/student/my-subjects-screen/my-subjects-screen.component';
 
+// TEACHER
+import { MySubjectsInChargeScreenComponent } from './screen/teacher/my-subjects-in-charge-screen/my-subjects-in-charge-screen.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -43,6 +46,15 @@ const routes: Routes = [
             component: StudentInscriptionToSubjectScreenComponent,
           },
           { path: 'my-subjects', component: MySubjectsScreenComponent },
+        ],
+      },
+      {
+        path: 'teacher',
+        children: [
+          {
+            path: 'my-subjects-in-charge',
+            component: MySubjectsInChargeScreenComponent,
+          },
         ],
       },
     ],

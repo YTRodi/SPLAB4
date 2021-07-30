@@ -19,6 +19,7 @@ import { ListSubjectsComponent } from './screen/admin/list-subjects/list-subject
 import { ListUsersComponent } from './screen/admin/list-users/list-users.component';
 import { StudentInscriptionToSubjectScreenComponent } from './screen/student/student-inscription-to-subject-screen/student-inscription-to-subject-screen.component';
 import { MySubjectsScreenComponent } from './screen/student/my-subjects-screen/my-subjects-screen.component';
+import { MySubjectsInChargeScreenComponent } from './screen/teacher/my-subjects-in-charge-screen/my-subjects-in-charge-screen.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MySubjectsScreenComponent } from './screen/student/my-subjects-screen/m
     ListUsersComponent,
     StudentInscriptionToSubjectScreenComponent,
     MySubjectsScreenComponent,
+    MySubjectsInChargeScreenComponent,
   ],
   imports: [CommonModule, ProtectedRoutingModule, SharedModule],
 })
