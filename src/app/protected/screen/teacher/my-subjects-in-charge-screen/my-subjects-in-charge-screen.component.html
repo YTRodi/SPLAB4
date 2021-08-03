@@ -9,7 +9,32 @@
         [title]="'mis materias a cargo'"
         (onSelectSubject)="this.setSelectedSubject($event)"
         [subjectsByTeacherParams]="this.currentUserFromDB"
+        data-bs-toggle="modal"
+        data-bs-target="#subjectInfo"
       ></app-subjects-table>
+    </div>
+  </div>
+</div>
+
+<!-- Subjects detail (modal) -->
+<div class="modal fade" id="subjectInfo" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Detalle de {{ this.selectedSubject?.name }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <app-users-table [studentsBySubject]="this.selectedSubject">
+        </app-users-table>
+      </div>
     </div>
   </div>
 </div>
