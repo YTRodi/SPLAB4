@@ -41,13 +41,13 @@ export class SubjectsTableComponent implements OnInit, OnChanges {
   async ngOnInit(): Promise<any> {
     const { currentUserFromDB } = await this.authService.getCurrentUser();
     this.currentUserFromDB = currentUserFromDB;
-
-    this.subjectService
-      .getAllSubjects()
-      .subscribe((subjectsList) => (this.subjectsList = subjectsList));
   }
 
   async ngOnChanges(changes: SimpleChanges): Promise<any> {
+    this.subjectService
+      .getAllSubjects()
+      .subscribe((subjectsList) => (this.subjectsList = subjectsList));
+
     if (
       changes.subjectsByStudentParams &&
       changes.subjectsByStudentParams.currentValue

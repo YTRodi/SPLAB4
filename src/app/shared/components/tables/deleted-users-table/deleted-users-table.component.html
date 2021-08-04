@@ -55,23 +55,8 @@
               UID {{ deletedUser.deletedUser.uid }}
             </small>
             <h6 class="my-0">{{ deletedUser.deletedUser.email }}</h6>
-
-            <div [ngSwitch]="deletedUser.deletedUser.type">
-              <small class="text-muted" *ngSwitchCase="'STUDENT'">
-                Alumno
-              </small>
-            </div>
           </div>
         </div>
-
-        <span class="text-muted">
-          <button
-            class="btn btn-outline-success"
-            (click)="this.onBackToTheSystem(deletedUser)"
-          >
-            Volver al sistema
-          </button>
-        </span>
       </li>
     </ul>
   </div>

@@ -93,8 +93,8 @@ export class UserService {
     user: any,
     folder: FolderImages,
     images: File[]
-  ): void {
-    this.uploadImage(user, folder, images);
+  ): Promise<any> {
+    return this.uploadImage(user, folder, images);
   }
 
   public addUser(user: User) {

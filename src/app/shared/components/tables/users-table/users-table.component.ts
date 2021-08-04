@@ -14,6 +14,7 @@ import { confirmNotification } from 'src/app/helpers/notifications';
 import { Subject } from 'src/app/interfaces/subject.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { DeletedUsersService } from 'src/app/protected/services/deleted-users.service';
+import { SubjectService } from 'src/app/protected/services/subject.service';
 
 @Component({
   selector: 'app-users-table',
@@ -34,7 +35,8 @@ export class UsersTableComponent implements OnInit, OnChanges {
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private deletedUsersService: DeletedUsersService
+    private deletedUsersService: DeletedUsersService,
+    private subjectService: SubjectService
   ) {
     this.onSelectUser = new EventEmitter<User>();
   }
@@ -83,6 +85,8 @@ export class UsersTableComponent implements OnInit, OnChanges {
   }
 
   async onDeleteUser(user: User) {
+    console.log(`user`, user);
+
     const userType =
       user.type === Types.STUDENT
         ? 'alumno'
@@ -103,6 +107,25 @@ export class UsersTableComponent implements OnInit, OnChanges {
         deletedUser: updatedUser,
         deletedAt: new Date().toISOString(),
       });
+
+      this.subjectService
+        .getAllSubjectsByStudent(user)
+        .subscribe((subjectsByStudent: Subject[]) => {
+          subjectsByStudent.filter(
+            async (originalSubject: Subject, index: number) => {
+              const updatedStudents = originalSubject.students.filter(
+                (student: User) => student.email !== user.email
+              );
+
+              const updatedSubject: Subject = {
+                ...originalSubject,
+                students: updatedStudents,
+              };
+
+              await this.subjectService.updateSubjectData(updatedSubject);
+            }
+          );
+        });
     }
   }
 }

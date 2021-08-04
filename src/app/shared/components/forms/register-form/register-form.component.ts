@@ -126,7 +126,7 @@ export class RegisterFormComponent implements OnInit {
           this.isAdminRegister
         );
 
-      this.userService.preAddAndUploadImage(
+      await this.userService.preAddAndUploadImage(
         { ...newUser, userUid: userCredentials.uid },
         FolderImages.users,
         [this.photo]

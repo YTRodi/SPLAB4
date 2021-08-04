@@ -18,7 +18,10 @@ export class MySubjectsInChargeScreenComponent implements OnInit {
     const { currentUserFromDB } = await this.authService.getCurrentUser();
     this.currentUserFromDB = currentUserFromDB;
   }
+
   setSelectedSubject(subject: Subject) {
     this.selectedSubject = subject;
+
+    console.log(`this.selectedSubject`, this.selectedSubject);
   }
 }

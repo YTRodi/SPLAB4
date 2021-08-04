@@ -14,10 +14,7 @@ export class DeletedUsersTableComponent implements OnInit {
   @Input() title: string = 'usuarios borrados';
   public deletedUserList: DeletedUser[] | null = null;
 
-  constructor(
-    private deletedUsersService: DeletedUsersService,
-    private usersService: UserService
-  ) {}
+  constructor(private deletedUsersService: DeletedUsersService) {}
 
   ngOnInit(): void {
     this.deletedUsersService
@@ -25,21 +22,5 @@ export class DeletedUsersTableComponent implements OnInit {
       .subscribe(
         (deletedUsers: DeletedUser[]) => (this.deletedUserList = deletedUsers)
       );
-  }
-
-  async onBackToTheSystem(deletedUser: DeletedUser) {
-    const confirm = await confirmNotification({
-      text: `Volver al sistema al usuario ${deletedUser.deletedUser.email}?`,
-      confirmParams: { title: 'Usuario vuelvo al sistema!' },
-    });
-
-    if (confirm) {
-      console.log(`deletedUser`, deletedUser);
-      this.usersService.updateUserData({
-        ...deletedUser.deletedUser,
-        active: true,
-      });
-      this.deletedUsersService.deleteDeletedUser(deletedUser.uid);
-    }
   }
 }

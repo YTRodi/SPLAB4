@@ -45,6 +45,24 @@ export class SubjectService {
       );
   }
 
+  public getAllSubjectsByStudent(user: User): Observable<any[]> {
+    return this.afs
+      .collection(this.nameCollectionDB, (ref) =>
+        ref.where('students', 'array-contains', user)
+      )
+      .snapshotChanges()
+      .pipe(
+        map((actions: any) =>
+          actions.map((a: any) => {
+            const data = a.payload.doc.data() as object;
+            const uid = a.payload.doc.id;
+
+            return { uid, ...data };
+          })
+        )
+      );
+  }
+
   public async getSubjectsByTeacherEmail(teacherEmail: string) {
     return this.afs
       .collection(this.nameCollectionDB, (ref) =>
