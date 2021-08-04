@@ -6,7 +6,12 @@
   <div class="row mb-3">
     <div class="animate__animated animate__fadeIn">
       <!-- TODO: Falta filtro por PIPE, puedo ir cambiar el parámetro [filter] con el pipe? -->
-      <app-users-table [isAdmin]="true" [filter]="'ALL'" [title]="'usuarios'">
+      <app-users-table
+        [full]="true"
+        [isAdmin]="true"
+        [filter]="'ALL'"
+        [title]="'usuarios'"
+      >
       </app-users-table>
     </div>
   </div>

@@ -21,6 +21,7 @@ import { User } from 'src/app/interfaces/user.interface';
 })
 export class UsersTableComponent implements OnInit, OnChanges {
   @Input() isAdmin: boolean = false;
+  @Input() full: boolean = false;
   @Input() studentsBySubject: Subject | null = null;
   @Input() title: string = 'usuarios';
   @Input() filter: 'STUDENT' | 'TEACHER' | 'ADMIN' | 'ALL' = 'ALL';

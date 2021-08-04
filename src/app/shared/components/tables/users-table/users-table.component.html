@@ -28,7 +28,14 @@
     </span>
   </h4>
 
-  <div class="overflow-auto" style="height: 275px">
+  <div
+    class="overflow-auto"
+    [ngClass]="{
+      fullTableHeight: this.full,
+      defaultTableHeight: this.full === false
+    }"
+  >
+    <!-- style="height: 275px" -->
     <ul class="list-group">
       <li
         class="

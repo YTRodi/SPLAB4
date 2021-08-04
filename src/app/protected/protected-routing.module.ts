@@ -24,7 +24,6 @@ const routes: Routes = [
     component: HomeScreenComponent,
     children: [
       { path: 'dashboard', component: DashboardScreenComponent },
-
       {
         path: 'admin',
         children: [
