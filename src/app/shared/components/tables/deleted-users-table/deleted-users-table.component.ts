@@ -11,11 +11,7 @@ import { DeletedUsersService } from 'src/app/protected/services/deleted-users.se
 })
 export class DeletedUsersTableComponent implements OnInit {
   @Input() full: boolean = false;
-  // @Input() studentsBySubject: Subject | null = null;
   @Input() title: string = 'usuarios borrados';
-  // @Output() onSelectDeletedUser: EventEmitter<User>;
-  // public currentUserFromDB: User | null = null;
-  // public types = Types;
   public deletedUserList: DeletedUser[] | null = null;
 
   constructor(
