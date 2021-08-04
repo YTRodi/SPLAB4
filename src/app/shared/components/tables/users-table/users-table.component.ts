@@ -85,8 +85,6 @@ export class UsersTableComponent implements OnInit, OnChanges {
   }
 
   async onDeleteUser(user: User) {
-    console.log(`user`, user);
-
     const userType =
       user.type === Types.STUDENT
         ? 'alumno'
@@ -120,6 +118,7 @@ export class UsersTableComponent implements OnInit, OnChanges {
               const updatedSubject: Subject = {
                 ...originalSubject,
                 students: updatedStudents,
+                places: originalSubject.places + 1,
               };
 
               await this.subjectService.updateSubjectData(updatedSubject);
