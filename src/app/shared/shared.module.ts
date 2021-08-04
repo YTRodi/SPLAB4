@@ -13,6 +13,7 @@ import { SubjectFormComponent } from './components/forms/subject-form/subject-fo
 import { SubjectsTableComponent } from './components/tables/subjects-table/subjects-table.component';
 import { SubjectDetailComponent } from './components/detail/subject-detail/subject-detail.component';
 import { EmptyCardComponent } from './components/cards/empty-card/empty-card.component';
+import { DeletedUsersTableComponent } from './components/tables/deleted-users-table/deleted-users-table.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { EmptyCardComponent } from './components/cards/empty-card/empty-card.com
     SubjectsTableComponent,
     SubjectDetailComponent,
     EmptyCardComponent,
+    DeletedUsersTableComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, AuthRoutingModule],
   exports: [
@@ -37,6 +39,8 @@ import { EmptyCardComponent } from './components/cards/empty-card/empty-card.com
     // Tables
     UsersTableComponent,
     SubjectsTableComponent,
+    DeletedUsersTableComponent,
+
     // Details
     UserDetailComponent,
     SubjectDetailComponent,

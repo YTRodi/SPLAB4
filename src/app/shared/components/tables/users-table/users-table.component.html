@@ -78,7 +78,10 @@
 
         <span class="text-muted" *ngIf="this.isAdmin">
           <button
-            *ngIf="this.currentUserFromDB?.email !== user.email"
+            *ngIf="
+              this.currentUserFromDB?.email !== user.email &&
+              user.type === 'STUDENT'
+            "
             class="btn btn-outline-danger"
             (click)="this.onDeleteUser(user)"
           >

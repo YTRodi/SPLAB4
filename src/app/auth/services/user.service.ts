@@ -8,15 +8,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize, first, map, tap } from 'rxjs/operators';
 import { FolderImages } from 'src/app/constants/images';
-import { Types } from 'src/app/constants/types';
 import { File } from 'src/app/interfaces/file.interface';
 import { User } from 'src/app/interfaces/user.interface';
-// import { Specialist, Admin } from 'src/app/classes/entities';
-// import { FolderImages } from 'src/app/constants/images';
-// import { Roles } from 'src/app/constants/roles';
-// import { Patient, Specialist, Admin } from 'src/app/interfaces/entities';
-// import { FileI } from '../interfaces/fileI';
-// import { v4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +30,9 @@ export class UserService {
 
   public getAllUsers(): Observable<any[]> {
     return this.afs
-      .collection(this.nameCollectionDB)
+      .collection(this.nameCollectionDB, (ref) =>
+        ref.where('active', '==', true)
+      )
       .snapshotChanges()
       .pipe(
         map((actions: any) =>
@@ -55,7 +50,9 @@ export class UserService {
     type: 'STUDENT' | 'TEACHER' | 'ADMIN' | 'ALL'
   ) {
     return this.afs
-      .collection(this.nameCollectionDB, (ref) => ref.where('type', '==', type))
+      .collection(this.nameCollectionDB, (ref) =>
+        ref.where('type', '==', type).where('active', '==', true)
+      )
       .snapshotChanges()
       .pipe(
         map((actions: any) =>
@@ -87,7 +84,7 @@ export class UserService {
     this.itemDoc.delete();
   }
 
-  public async updateUserData(user: any) {
+  public async updateUserData(user: User) {
     this.itemDoc = this.afs.doc(`users/${user.uid}`);
     this.itemDoc.update(user);
   }

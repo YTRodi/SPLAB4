@@ -13,6 +13,7 @@ import { Types } from 'src/app/constants/types';
 import { confirmNotification } from 'src/app/helpers/notifications';
 import { Subject } from 'src/app/interfaces/subject.interface';
 import { User } from 'src/app/interfaces/user.interface';
+import { DeletedUsersService } from 'src/app/protected/services/deleted-users.service';
 
 @Component({
   selector: 'app-users-table',
@@ -28,11 +29,12 @@ export class UsersTableComponent implements OnInit, OnChanges {
   @Output() onSelectUser: EventEmitter<User>;
   public currentUserFromDB: User | null = null;
   public types = Types;
-  public userList: Array<any> | null = null;
+  public userList: User[] | null = null;
 
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private deletedUsersService: DeletedUsersService
   ) {
     this.onSelectUser = new EventEmitter<User>();
   }
@@ -93,6 +95,14 @@ export class UsersTableComponent implements OnInit, OnChanges {
       confirmParams: { title: 'Usuario eliminado con éxito' },
     });
 
-    if (confirm) this.userService.deleteUser(user.uid);
+    if (confirm) {
+      const updatedUser: User = { ...user, active: false };
+      this.userService.updateUserData(updatedUser);
+
+      this.deletedUsersService.addDeletedUser({
+        deletedUser: updatedUser,
+        deletedAt: new Date().toISOString(),
+      });
+    }
   }
 }

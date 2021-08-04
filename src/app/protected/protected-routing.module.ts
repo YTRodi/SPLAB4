@@ -10,6 +10,7 @@ import { CreateSubjectsScreenComponent } from './screen/admin/create-subjects-sc
 import { InscriptionToSubjectScreenComponent } from './screen/admin/inscription-to-subject-screen/inscription-to-subject-screen.component';
 import { ListSubjectsComponent } from './screen/admin/list-subjects/list-subjects.component';
 import { ListUsersComponent } from './screen/admin/list-users/list-users.component';
+import { DeletedUsersComponent } from './screen/admin/deleted-users/deleted-users.component';
 
 // STUDENT
 import { StudentInscriptionToSubjectScreenComponent } from './screen/student/student-inscription-to-subject-screen/student-inscription-to-subject-screen.component';
@@ -35,6 +36,7 @@ const routes: Routes = [
           },
           { path: 'list-of-subjects', component: ListSubjectsComponent },
           { path: 'list-of-users', component: ListUsersComponent },
+          { path: 'list-of-deleted-users', component: DeletedUsersComponent },
         ],
       },
       {

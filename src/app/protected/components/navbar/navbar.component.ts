@@ -37,6 +37,10 @@ export class NavbarComponent implements OnInit {
     { to: '/admin/incription-to-subject', routeName: 'Incripción a materias' },
     { to: '/admin/list-of-subjects', routeName: 'Lista de materias' },
     { to: '/admin/list-of-users', routeName: 'Lista de usuarios' },
+    {
+      to: '/admin/list-of-deleted-users',
+      routeName: 'Lista de alumnos borrados',
+    },
   ];
 
   constructor(public authService: AuthService, private router: Router) {

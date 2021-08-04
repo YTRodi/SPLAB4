@@ -115,7 +115,7 @@ export class RegisterFormComponent implements OnInit {
   async sendForm() {
     try {
       const { email, password, photo, type } = this.registerForm.getRawValue();
-      const newUser: User = { email, photo, type };
+      const newUser: User = { email, photo, type, active: true };
 
       const userCredentials =
         await this.authService.registerWithEmailAndPassword(

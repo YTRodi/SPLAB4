@@ -1,5 +1,6 @@
 export interface User {
   uid?: string;
+  active?: boolean;
   userUid?: string;
   email: string;
   password?: string;
@@ -7,6 +8,8 @@ export interface User {
   type: string;
 }
 
-// export interface Student extends User {}
-// export interface Teacher extends User {}
-// export interface Admin extends User {}
+export interface DeletedUser {
+  uid?: string;
+  deletedUser: User;
+  deletedAt: string;
+}
