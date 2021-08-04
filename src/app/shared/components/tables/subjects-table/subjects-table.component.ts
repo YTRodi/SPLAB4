@@ -19,6 +19,7 @@ import { SubjectService } from 'src/app/protected/services/subject.service';
   styleUrls: ['./subjects-table.component.css'],
 })
 export class SubjectsTableComponent implements OnInit, OnChanges {
+  @Input() isAdmin: boolean = false;
   @Input() showTeacher: boolean = false;
   @Input() detailEneabled: boolean = false;
   @Input() subjectsByStudentParams: User | null = null;

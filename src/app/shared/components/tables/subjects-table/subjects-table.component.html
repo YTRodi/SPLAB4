@@ -85,7 +85,7 @@
           </div>
         </div>
 
-        <span class="text-muted">
+        <span class="text-muted" *ngIf="this.isAdmin">
           <button
             class="btn btn-outline-danger"
             (click)="this.onDeleteSubject(subject)"

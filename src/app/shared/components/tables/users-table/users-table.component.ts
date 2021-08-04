@@ -20,6 +20,7 @@ import { User } from 'src/app/interfaces/user.interface';
   styleUrls: ['./users-table.component.css'],
 })
 export class UsersTableComponent implements OnInit, OnChanges {
+  @Input() isAdmin: boolean = false;
   @Input() studentsBySubject: Subject | null = null;
   @Input() title: string = 'usuarios';
   @Input() filter: 'STUDENT' | 'TEACHER' | 'ADMIN' | 'ALL' = 'ALL';
