@@ -8,22 +8,44 @@
       <app-subjects-table
         [title]="'materias'"
         (onSelectSubject)="this.setSelectedSubject($event)"
+        [showTeacher]="true"
+        data-bs-toggle="modal"
+        data-bs-target="#subjectInfo"
       ></app-subjects-table>
     </div>
   </div>
+</div>
 
-  <div class="row mb-3 text-center" *ngIf="!this.selectedSubject">
-    <h4>Seleccione una materia para ver a los alumnos inscriptos!</h4>
-  </div>
+<!-- Subjects detail (modal) -->
+<div class="modal fade" id="subjectInfo" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img
+          [src]="this.selectedSubject?.photo"
+          alt="Subject image"
+          width="55"
+          height="55"
+        />
 
-  <div class="row mb-3" *ngIf="this.selectedSubject">
-    <div class="animate__animated animate__fadeIn">
-      <app-users-table
-        [filter]="'STUDENT'"
-        [title]="this.getTitleUsersTable()"
-        [studentsBySubject]="this.selectedSubject"
-      >
-      </app-users-table>
+        <h5 class="modal-title mx-3" id="exampleModalLabel">
+          Detalle de {{ this.selectedSubject?.name }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <app-users-table
+          [filter]="'STUDENT'"
+          [title]="this.getTitleUsersTable()"
+          [studentsBySubject]="this.selectedSubject"
+        >
+        </app-users-table>
+      </div>
     </div>
   </div>
 </div>

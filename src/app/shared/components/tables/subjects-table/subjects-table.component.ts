@@ -7,7 +7,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { Quarters } from 'src/app/constants/quarter';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { confirmNotification } from 'src/app/helpers/notifications';
 import { Subject } from 'src/app/interfaces/subject.interface';
 import { User } from 'src/app/interfaces/user.interface';
@@ -19,18 +19,27 @@ import { SubjectService } from 'src/app/protected/services/subject.service';
   styleUrls: ['./subjects-table.component.css'],
 })
 export class SubjectsTableComponent implements OnInit, OnChanges {
+  @Input() showTeacher: boolean = false;
+  @Input() detailEneabled: boolean = false;
   @Input() subjectsByStudentParams: User | null = null;
   @Input() subjectsByTeacherParams: User | null = null;
   @Input() title: string = 'usuarios';
   // @Input() filter: 'STUDENT' | 'TEACHER' | 'ADMIN' | 'ALL' = 'ALL';
   @Output() onSelectSubject: EventEmitter<Subject>;
-  public subjectsList: Array<any> | null = null;
+  public subjectsList: Subject[] | null = null;
+  public currentUserFromDB: any;
 
-  constructor(private subjectService: SubjectService) {
+  constructor(
+    private subjectService: SubjectService,
+    private authService: AuthService
+  ) {
     this.onSelectSubject = new EventEmitter<Subject>();
   }
 
-  ngOnInit(): any {
+  async ngOnInit(): Promise<any> {
+    const { currentUserFromDB } = await this.authService.getCurrentUser();
+    this.currentUserFromDB = currentUserFromDB;
+
     this.subjectService
       .getAllSubjects()
       .subscribe((subjectsList) => (this.subjectsList = subjectsList));

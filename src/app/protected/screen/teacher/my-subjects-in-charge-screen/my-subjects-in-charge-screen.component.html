@@ -32,7 +32,10 @@
       </div>
 
       <div class="modal-body">
-        <app-users-table [studentsBySubject]="this.selectedSubject">
+        <app-users-table
+          [filter]="'STUDENT'"
+          [studentsBySubject]="this.selectedSubject"
+        >
         </app-users-table>
       </div>
     </div>

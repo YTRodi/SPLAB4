@@ -36,39 +36,37 @@ export class UsersTableComponent implements OnInit, OnChanges {
   }
 
   async ngOnInit(): Promise<void> {
-    switch (this.filter) {
-      case 'ALL':
-        this.userService
-          .getAllUsers()
-          .subscribe((userList) => (this.userList = userList));
-        break;
-
-      case 'STUDENT':
-        (await this.userService.getAllUsersByType(this.filter)).subscribe(
-          (onlyStudents) => (this.userList = onlyStudents)
-        );
-        break;
-
-      case 'TEACHER':
-        (await this.userService.getAllUsersByType(this.filter)).subscribe(
-          (onlyTeachers) => (this.userList = onlyTeachers)
-        );
-        break;
-
-      case 'ADMIN':
-        (await this.userService.getAllUsersByType(this.filter)).subscribe(
-          (onlyAdmins) => (this.userList = onlyAdmins)
-        );
-        break;
-    }
-
     const { currentUserFromDB } = await this.authService.getCurrentUser();
     this.currentUserFromDB = currentUserFromDB;
   }
 
-  async ngOnChanges(changes: SimpleChanges): Promise<void> {
+  async ngOnChanges(changes: SimpleChanges): Promise<any> {
     if (changes.studentsBySubject && changes.studentsBySubject.currentValue) {
       return (this.userList = changes.studentsBySubject.currentValue.students);
+    }
+
+    if (changes.filter && changes.filter.currentValue) {
+      switch (this.filter) {
+        case 'ALL':
+          return this.userService
+            .getAllUsers()
+            .subscribe((userList) => (this.userList = userList));
+
+        case 'STUDENT':
+          return (
+            await this.userService.getAllUsersByType(this.filter)
+          ).subscribe((onlyStudents) => (this.userList = onlyStudents));
+
+        case 'TEACHER':
+          return (
+            await this.userService.getAllUsersByType(this.filter)
+          ).subscribe((onlyTeachers) => (this.userList = onlyTeachers));
+
+        case 'ADMIN':
+          return (
+            await this.userService.getAllUsersByType(this.filter)
+          ).subscribe((onlyAdmins) => (this.userList = onlyAdmins));
+      }
     }
   }
 

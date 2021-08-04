@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { FolderImages } from 'src/app/constants/images';
 import { Quarters } from 'src/app/constants/quarter';
 import { Types } from 'src/app/constants/types';
 import {
@@ -37,6 +38,7 @@ export class SubjectFormComponent implements OnInit {
   @Input() isAdminRegister: boolean = false;
   public subjectForm: FormGroup;
   public quarters = Quarters;
+  private photo: any;
 
   constructor(private subjectService: SubjectService) {
     this.subjectForm = this.getSubjectForm();
@@ -53,7 +55,7 @@ export class SubjectFormComponent implements OnInit {
     return new FormBuilder().group({
       name: new FormControl('', [
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(3),
         Validators.maxLength(20),
       ]),
       quarter: new FormControl('', [Validators.required]),
@@ -67,7 +69,12 @@ export class SubjectFormComponent implements OnInit {
         Validators.min(2020),
         Validators.max(2050),
       ]),
+      photo: new FormControl(null, [Validators.required]),
     });
+  }
+
+  handlePhoto(event: any): void {
+    this.photo = event.target.files[0];
   }
 
   getErrorMessage(formControlName: string) {
@@ -76,7 +83,7 @@ export class SubjectFormComponent implements OnInit {
         return 'Debes ingresar un valor';
 
       if (this.subjectForm.get(formControlName)?.hasError('minlength')) {
-        return 'Debe de contener 6 caracteres como mínimo';
+        return 'Debe de contener 3 caracteres como mínimo';
       }
 
       if (this.subjectForm.get(formControlName)?.hasError('maxlength'))
@@ -116,11 +123,12 @@ export class SubjectFormComponent implements OnInit {
         teacher: this.selectedTeacher,
         students: [],
       };
-      const result = await this.subjectService.addSubject(newSubject);
 
-      if (result) {
-        successNotification({ text: 'La materia fue dada de alta con éxito' });
-      }
+      this.subjectService.preAddAndUploadImage(newSubject, FolderImages.other, [
+        this.photo,
+      ]);
+
+      successNotification({ text: 'La materia fue dada de alta con éxito' });
 
       this.subjectForm.reset();
       this.subjectForm.get('quarter')?.setValue('');

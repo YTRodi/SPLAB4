@@ -5,12 +5,29 @@
 
 <h6
   class="text-center"
-  *ngIf="this.subjectsList && this.subjectsList.length === 0"
+  *ngIf="
+    this.currentUserFromDB &&
+    this.currentUserFromDB.type === 'ADMIN' &&
+    this.subjectsList &&
+    this.subjectsList.length === 0
+  "
 >
   No hay materias, probá dando de alta una
   <span class="cursor text-primary" [routerLink]="['/admin/create-subject']">
     aquí
   </span>
+</h6>
+
+<h6
+  class="text-center"
+  *ngIf="
+    this.currentUserFromDB &&
+    this.currentUserFromDB.type === 'TEACHER' &&
+    this.subjectsList &&
+    this.subjectsList.length === 0
+  "
+>
+  No tenés materias a cargo
 </h6>
 
 <div
@@ -23,8 +40,6 @@
       {{ this.subjectsList?.length }}
     </span>
   </h4>
-
-  <!-- <div>Checkboxs para los filtros</div> -->
 
   <div class="overflow-auto" style="height: 275px">
     <ul class="list-group">
@@ -41,21 +56,31 @@
         (click)="this.selectSubject(subject)"
       >
         <div class="d-flex d-flex justify-content-center align-items-center">
-          <!-- <img
-            class="me-3 rounded-circle"
+          <img
+            class="me-3"
             [src]="subject.photo"
-            alt="User image"
+            alt="Subject image"
             width="55"
             height="55"
-          /> -->
+          />
 
           <div>
+            <h6 class="my-0" *ngIf="this.showTeacher">
+              Profesor: {{ subject.teacher.email }}
+            </h6>
+
             <small class="text-muted">UID {{ subject.uid }}</small>
             <h6 class="my-0">
-              {{ subject.name }} - {{ this.transformQuarter(subject.quarter) }}
+              {{ subject.name }} -
+              {{ this.transformQuarter(subject.quarter) }}
             </h6>
             <small class="text-muted">
               {{ subject.places }} cupos disponibles
+              {{
+                subject.students.length !== 0
+                  ? "- alumnos inscriptos: " + subject.students.length
+                  : null
+              }}
             </small>
           </div>
         </div>
@@ -72,10 +97,3 @@
     </ul>
   </div>
 </div>
-
-<!-- <form class="card p-2">
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Promo code" />
-    <button type="submit" class="btn btn-secondary">Redeem</button>
-  </div>
-</form> -->

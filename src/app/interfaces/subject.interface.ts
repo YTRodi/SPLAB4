@@ -8,4 +8,5 @@ export interface Subject {
   age: number;
   teacher: User;
   students: Array<User>;
+  photo?: string;
 }

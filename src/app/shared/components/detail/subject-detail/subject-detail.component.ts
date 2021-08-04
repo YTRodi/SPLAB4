@@ -83,7 +83,9 @@ export class SubjectDetailComponent implements OnInit {
       };
 
       this.subjectService.updateSubjectData(updatedSubject);
-      successNotification({ text: 'La inscripción fue exitosa' });
+      this.selectedsUsers = [];
+      this.selectedSubject = null;
+      return successNotification({ text: 'La inscripción fue exitosa' });
     }
 
     const studentAlreadyInscripted = this.selectedSubject?.students.find(

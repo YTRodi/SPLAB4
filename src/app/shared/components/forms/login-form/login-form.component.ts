@@ -20,7 +20,7 @@ export class LoginFormComponent implements OnInit {
     password: '123456',
   };
   public testTeacher = {
-    email: 'profesor@gmail.com',
+    email: 'octavio@gmail.com',
     password: '123456',
   };
   public testAdmin = {

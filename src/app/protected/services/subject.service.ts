@@ -74,23 +74,26 @@ export class SubjectService {
   }
 
   public preAddAndUploadImage(
-    user: any,
+    subject: Subject,
     folder: FolderImages,
     images: File[]
   ): void {
-    this.uploadImage(user, folder, images);
+    this.uploadImage(subject, folder, images);
   }
 
   public addSubject(subject: Subject) {
-    // todo: El return lo agrego ahora que NO tengo foto en la materia
     return this.subjectsCollection.add({
       ...subject,
-      // photo: this.urlImages[0], // Agregar cuando tenga la imagen.
+      photo: this.urlImages[0],
       createdAt: new Date().toISOString(),
     });
   }
 
-  private async uploadImage(user: any, folder: FolderImages, images: File[]) {
+  private async uploadImage(
+    subject: Subject,
+    folder: FolderImages,
+    images: File[]
+  ) {
     this.filePath = `${folder}/${images[0].name}`;
 
     const fileRef = this.storage.ref(this.filePath);
@@ -101,7 +104,7 @@ export class SubjectService {
         finalize(() => {
           fileRef.getDownloadURL().subscribe((urlImage) => {
             this.urlImages = [...this.urlImages, urlImage].reverse();
-            this.addSubject(user);
+            this.addSubject(subject);
           });
         })
       )

@@ -4,14 +4,14 @@
 ></app-spinner>
 
 <app-empty-card
-  *ngIf="this.userList && !this.studentsBySubject && this.userList.length === 0"
+  *ngIf="!this.studentsBySubject && this.userList && this.userList.length === 0"
   [text]="'No hay usuarios'"
   [icon]="'USER'"
 >
 </app-empty-card>
 
 <app-empty-card
-  *ngIf="this.userList && this.studentsBySubject && this.userList.length === 0"
+  *ngIf="this.studentsBySubject && this.userList && this.userList.length === 0"
   [text]="this.getTitleEmptyCardBystudentsBySubjectFilter()"
   [icon]="'USER'"
 >
@@ -27,8 +27,6 @@
       {{ this.userList?.length }}
     </span>
   </h4>
-
-  <!-- <div>Checkboxs para los filtros</div> -->
 
   <div class="overflow-auto" style="height: 275px">
     <ul class="list-group">
@@ -84,10 +82,3 @@
     </ul>
   </div>
 </div>
-
-<!-- <form class="card p-2">
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Promo code" />
-    <button type="submit" class="btn btn-secondary">Redeem</button>
-  </div>
-</form> -->
