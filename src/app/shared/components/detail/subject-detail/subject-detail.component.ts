@@ -101,7 +101,7 @@ export class SubjectDetailComponent implements OnInit {
     if (this.selectedSubject?.places === 0) {
       return errorNotification({
         title: 'Se acabaron los cupos',
-        text: `Cupos disponibles: ${this.selectedSubject.places} :(`,
+        text: `No hay cupos disponibles :(`,
       });
     }
 

@@ -74,7 +74,6 @@ export class SubjectsTableComponent implements OnInit, OnChanges {
       );
 
       return result.subscribe((subjects: Subject[]) => {
-        console.log('entro');
         this.subjectsList = subjects;
       });
     }
@@ -93,9 +92,3 @@ export class SubjectsTableComponent implements OnInit, OnChanges {
     if (confirm) this.subjectService.deleteSubject(subject.uid);
   }
 }
-
-// TODO: Directiva para cambiar de color la materia dependiendo de los cupos que tenga.
-// TODO: Directiva para cambiar de color la materia dependiendo de los cupos que tenga.
-// TODO: Directiva para cambiar de color la materia dependiendo de los cupos que tenga.
-// TODO: Directiva para cambiar de color la materia dependiendo de los cupos que tenga.
-// TODO: Directiva para cambiar de color la materia dependiendo de los cupos que tenga.
