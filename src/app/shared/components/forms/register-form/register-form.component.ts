@@ -113,7 +113,7 @@ export class RegisterFormComponent implements OnInit {
     return '';
   }
 
-  async sendForm() {
+  async sendForm(): Promise<any> {
     this.isLoading = true;
     try {
       const { email, password, photo, type } = this.registerForm.getRawValue();

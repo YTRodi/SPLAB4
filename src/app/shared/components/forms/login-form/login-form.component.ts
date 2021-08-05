@@ -83,7 +83,7 @@ export class LoginFormComponent implements OnInit {
     return '';
   }
 
-  async sendForm() {
+  async sendForm(): Promise<any> {
     this.isLoading = true;
 
     try {
