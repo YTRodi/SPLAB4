@@ -65,7 +65,9 @@
             </span>
             <br />
 
-            <small class="text-muted">UID {{ exam.student.uid }}</small>
+            <small class="text-muted">
+              Fecha del examen: {{ exam.date | date }}
+            </small>
             <h6 class="my-0">{{ exam.student.email }}</h6>
           </div>
         </div>
