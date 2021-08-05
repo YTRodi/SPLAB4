@@ -9,14 +9,6 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { successNotification } from 'src/app/helpers/notifications';
 import { Exam } from 'src/app/interfaces/exam.interface';
 import { User } from 'src/app/interfaces/user.interface';
-import {
-  format,
-  getYear,
-  getMonth,
-  getDay,
-  getHours,
-  getMinutes,
-} from 'date-fns';
 import { ExamService } from 'src/app/protected/services/exam.service';
 
 @Component({

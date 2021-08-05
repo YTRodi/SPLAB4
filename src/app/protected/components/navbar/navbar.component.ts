@@ -30,6 +30,7 @@ export class NavbarComponent implements OnInit {
   public navTeacher: Nav[] = [
     { to: '/teacher/my-subjects-in-charge', routeName: 'Materias a cargo' },
     { to: '/teacher/exams', routeName: 'Examenes' },
+    { to: '/teacher/examination-records', routeName: 'Actas de examen' },
   ];
 
   public navAdmin: Nav[] = [
@@ -57,8 +58,6 @@ export class NavbarComponent implements OnInit {
       await this.authService.getCurrentUser();
     this.currentUser = currentUser;
     this.currentUserFromDB = currentUserFromDB;
-
-    console.log(`this.currentUserFromDB`, this.currentUserFromDB);
 
     this.isStudent = this.currentUserFromDB.type === Types.STUDENT;
     this.isTeacher = this.currentUserFromDB.type === Types.TEACHER;

@@ -16,6 +16,8 @@ import { EmptyCardComponent } from './components/cards/empty-card/empty-card.com
 import { DeletedUsersTableComponent } from './components/tables/deleted-users-table/deleted-users-table.component';
 import { ExamFormComponent } from './components/forms/exam-form/exam-form.component';
 import { ExamsTableComponent } from './components/tables/exams-table/exams-table.component';
+import { ListadoAprobacionDirectaComponent } from './components/tables/listado-aprobacion-directa/listado-aprobacion-directa.component';
+import { ListadoNoDirectaComponent } from './components/tables/listado-no-directa/listado-no-directa.component';
 
 // Pipes
 import { ScorePipe } from './pipes/score.pipe';
@@ -41,6 +43,8 @@ import { PlacesDirective } from './directives/places.directive';
     ScorePipe,
     QuarterPipe,
     PlacesDirective,
+    ListadoAprobacionDirectaComponent,
+    ListadoNoDirectaComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, AuthRoutingModule],
   exports: [
@@ -56,6 +60,8 @@ import { PlacesDirective } from './directives/places.directive';
     SubjectsTableComponent,
     DeletedUsersTableComponent,
     ExamsTableComponent,
+    ListadoAprobacionDirectaComponent,
+    ListadoNoDirectaComponent,
 
     // Details
     UserDetailComponent,

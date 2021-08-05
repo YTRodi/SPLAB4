@@ -1,0 +1,64 @@
+<h4 class="d-flex justify-content-between align-items-center mb-3">
+  <span class="text-primary">Listado de {{ this.title }}</span>
+</h4>
+
+<h6 *ngIf="!this.filteredPromotedStudents">
+  Seleccioné una materia para ver los alumnos con aprobación directa!
+</h6>
+
+<h6
+  class="text-center"
+  *ngIf="
+    this.filteredPromotedStudents && this.filteredPromotedStudents.length === 0
+  "
+>
+  No hay alumnos con aprobación directa
+</h6>
+
+<div
+  class="mb-3 animate__animated animate__fadeIn"
+  *ngIf="
+    this.filteredPromotedStudents && this.filteredPromotedStudents.length !== 0
+  "
+>
+  <div class="overflow-auto fullTableHeight">
+    <ul class="list-group">
+      <li
+        class="
+          list-group-item
+          d-flex
+          justify-content-between
+          align-items-center
+          rounded
+          item
+        "
+        *ngFor="let exam of this.filteredPromotedStudents"
+      >
+        <div class="d-flex justify-content-center align-items-center">
+          <img
+            class="me-3 rounded-circle"
+            [src]="exam.student.photo"
+            alt="User image"
+            width="55"
+            height="55"
+          />
+
+          <div>
+            <span>
+              Nota: {{ exam.score }} -
+              <span class="badge rounded-pill bg-success">
+                {{ exam.score | score }}
+              </span>
+            </span>
+            <br />
+
+            <small class="text-muted">
+              Fecha del examen: {{ exam.date | date }}
+            </small>
+            <h6 class="my-0">{{ exam.student.email }}</h6>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

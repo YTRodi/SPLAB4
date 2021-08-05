@@ -19,6 +19,7 @@ import { MySubjectsScreenComponent } from './screen/student/my-subjects-screen/m
 // TEACHER
 import { MySubjectsInChargeScreenComponent } from './screen/teacher/my-subjects-in-charge-screen/my-subjects-in-charge-screen.component';
 import { ExamsComponent } from './screen/teacher/exams/exams.component';
+import { ActasDeExamenComponent } from './screen/teacher/actas-de-examen/actas-de-examen.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,7 @@ const routes: Routes = [
             component: MySubjectsInChargeScreenComponent,
           },
           { path: 'exams', component: ExamsComponent },
+          { path: 'examination-records', component: ActasDeExamenComponent },
           { path: '**', redirectTo: 'my-subjects-in-charge' },
         ],
       },
