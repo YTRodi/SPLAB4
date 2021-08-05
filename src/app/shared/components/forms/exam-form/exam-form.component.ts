@@ -34,7 +34,7 @@ export class ExamFormComponent implements OnInit, OnChanges {
       student: new FormControl(null, [Validators.required]),
       score: new FormControl(null, [
         Validators.required,
-        Validators.min(0),
+        Validators.min(1),
         Validators.max(10),
       ]),
     });
@@ -60,7 +60,7 @@ export class ExamFormComponent implements OnInit, OnChanges {
 
       if (formControlName === 'score') {
         if (this.examForm.get(formControlName)?.errors?.min)
-          return 'La nota debe ser como mínimo 0 ';
+          return 'La nota debe ser como mínimo 1 ';
         else if (this.examForm.get(formControlName)?.errors?.max)
           return 'La nota debe ser como máximo 10 ';
       }
