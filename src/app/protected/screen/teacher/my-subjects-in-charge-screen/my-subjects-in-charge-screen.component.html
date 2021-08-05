@@ -10,8 +10,9 @@
         (onSelectSubject)="this.setSelectedSubject($event)"
         [subjectsByTeacherParams]="this.currentUserFromDB"
         data-bs-toggle="modal"
-        data-bs-target="#subjectInfo"
+        data-bs-target="#createExam"
       ></app-subjects-table>
+      <!-- TODO: LUEGO VOLVER ESTO AL LUGAR. data-bs-target="#subjectInfo" -->
     </div>
   </div>
 </div>
@@ -21,8 +22,42 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          Detalle de {{ this.selectedSubject?.name }}
+        <h5 class="modal-title">Detalle de {{ this.selectedSubject?.name }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <button
+          class="btn btn-outline-primary w-100 mb-2"
+          data-bs-dismiss="modal"
+          data-bs-toggle="modal"
+          data-bs-target="#createExam"
+        >
+          🔥 Crear examen 🔥
+        </button>
+
+        <app-users-table
+          [filter]="'STUDENT'"
+          [title]="'alumnos'"
+          [studentsBySubject]="this.selectedSubject"
+        >
+        </app-users-table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create exam -->
+<div class="modal fade" id="createExam" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          Cargar nota de {{ this.selectedSubject?.name }}
         </h5>
         <button
           type="button"
@@ -32,11 +67,7 @@
       </div>
 
       <div class="modal-body">
-        <app-users-table
-          [filter]="'STUDENT'"
-          [studentsBySubject]="this.selectedSubject"
-        >
-        </app-users-table>
+        <app-exam-form [subject]="this.selectedSubject"></app-exam-form>
       </div>
     </div>
   </div>

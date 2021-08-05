@@ -1,0 +1,91 @@
+<div class="row">
+  <div class="col">
+    <app-users-table
+      [filter]="'STUDENT'"
+      [title]="'alumnos'"
+      [studentsBySubject]="this.subject"
+      (onSelectUser)="this.setSelectedStudent($event)"
+    ></app-users-table>
+  </div>
+</div>
+
+<form
+  class="form-signin p-3"
+  [formGroup]="this.examForm"
+  (ngSubmit)="this.sendExam()"
+  *ngIf="this.subject && this.subject.students.length !== 0"
+>
+  <!-- Student -->
+  <h6 class="text-center mb-3" *ngIf="!this.selectedStudent">
+    Elija un alumno de la lista para cargar su nota!
+  </h6>
+  <label class="form-label" *ngIf="this.selectedStudent">
+    Alumno seleccionado:
+  </label>
+
+  <div
+    class="d-flex justify-content-center align-items-center mb-3"
+    *ngIf="this.selectedStudent"
+  >
+    <div>
+      <img
+        style="border-radius: 100px"
+        [src]="this.selectedStudent.photo"
+        alt="student photo"
+        width="30"
+        height="30"
+      />
+    </div>
+    <div>
+      <input
+        type="text"
+        class="form-control ms-3"
+        [value]="this.selectedStudent.email"
+        disabled
+      />
+    </div>
+  </div>
+
+  <div class="mb-3" *ngIf="this.selectedStudent">
+    <div class="row">
+      <div class="col">
+        <!-- Date -->
+        <label class="form-label">Fecha del examen</label>
+        <input
+          class="form-control"
+          type="datetime-local"
+          placeholder="Fecha"
+          formControlName="date"
+        />
+
+        <div class="form-text error">
+          {{ this.getErrorMessage("date") }}
+        </div>
+      </div>
+
+      <div class="col">
+        <label class="form-label">Nota</label>
+        <input
+          class="form-control mb-3"
+          type="number"
+          placeholder="Nota"
+          formControlName="score"
+          min="0"
+          max="10"
+        />
+
+        <div class="form-text error">
+          {{ this.getErrorMessage("score") }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button
+    class="btn btn-primary w-100"
+    type="submit"
+    [disabled]="this.examForm.invalid"
+  >
+    Cargar nota de examen
+  </button>
+</form>
