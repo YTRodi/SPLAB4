@@ -83,16 +83,6 @@ export class SubjectsTableComponent implements OnInit, OnChanges {
     this.onSelectSubject.emit(selectedSubject);
   }
 
-  transformQuarter(quarter: string) {
-    if (quarter === 'FIRST') return 'Primer cuatrimestre';
-    if (quarter === 'SECOND') return 'Segundo cuatrimestre';
-    if (quarter === 'THIRD') return 'Tercer cuatrimestre';
-    if (quarter === 'FOURTH') return 'Cuarto cuatrimestre';
-    if (quarter === 'FIFTH') return 'Quinto cuatrimestre';
-    if (quarter === 'SIXTH') return 'Sexto cuatrimestre';
-    return '';
-  }
-
   async onDeleteSubject(subject: Subject) {
     const confirm = await confirmNotification({
       text: `Eliminar la materia ${subject.name}`,
@@ -102,3 +92,9 @@ export class SubjectsTableComponent implements OnInit, OnChanges {
     if (confirm) this.subjectService.deleteSubject(subject.uid);
   }
 }
+
+// TODO: Directiva para cambiar de color la materia dependiendo de los cupos que tenga.
+// TODO: Directiva para cambiar de color la materia dependiendo de los cupos que tenga.
+// TODO: Directiva para cambiar de color la materia dependiendo de los cupos que tenga.
+// TODO: Directiva para cambiar de color la materia dependiendo de los cupos que tenga.
+// TODO: Directiva para cambiar de color la materia dependiendo de los cupos que tenga.

@@ -1,8 +1,8 @@
 export enum Quarters {
-  FIRST = 'primero',
-  SECOND = 'segundo',
-  THIRD = 'tercero',
-  FOURTH = 'cuarto',
-  FIFTH = 'quinto',
-  SIXTH = 'sexto',
+  FIRST = 'FIRST',
+  SECOND = 'SECOND',
+  THIRD = 'THIRD',
+  FOURTH = 'FOURTH',
+  FIFTH = 'FIFTH',
+  SIXTH = 'SIXTH',
 }

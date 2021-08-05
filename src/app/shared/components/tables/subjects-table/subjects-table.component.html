@@ -78,7 +78,7 @@
             <small class="text-muted">UID {{ subject.uid }}</small>
             <h6 class="my-0">
               {{ subject.name }} -
-              {{ this.transformQuarter(subject.quarter) }}
+              {{ subject.quarter | quarter }}
             </h6>
             <small class="text-muted">
               {{ subject.places }} cupos disponibles

@@ -17,6 +17,7 @@ import { DeletedUsersTableComponent } from './components/tables/deleted-users-ta
 import { ExamFormComponent } from './components/forms/exam-form/exam-form.component';
 import { ExamsTableComponent } from './components/tables/exams-table/exams-table.component';
 import { ScorePipe } from './pipes/score.pipe';
+import { QuarterPipe } from './pipes/quarter.pipe';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ScorePipe } from './pipes/score.pipe';
     ExamFormComponent,
     ExamsTableComponent,
     ScorePipe,
+    QuarterPipe,
   ],
   imports: [CommonModule, ReactiveFormsModule, AuthRoutingModule],
   exports: [
