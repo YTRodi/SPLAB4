@@ -53,6 +53,10 @@
 
           <div>
             <small class="text-muted">
+              Fecha de borrado: {{ deletedUser.deletedAt | date: "medium" }}
+            </small>
+            <br />
+            <small class="text-muted">
               UID {{ deletedUser.deletedUser.uid }}
             </small>
             <h6 class="my-0" style="text-decoration: line-through">
