@@ -5,6 +5,7 @@ import { ProtectedRoutingModule } from './protected-routing.module';
 
 // Modules
 import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Components
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -41,6 +42,11 @@ import { UserEmailDirective } from './pipes/user-email.directive';
     ExamsComponent,
     UserEmailDirective,
   ],
-  imports: [CommonModule, ProtectedRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    ProtectedRoutingModule,
+    SharedModule,
+    ReactiveFormsModule,
+  ],
 })
 export class ProtectedModule {}

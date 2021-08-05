@@ -79,7 +79,7 @@ export class ExamService {
   }
 
   public async updateExamData(exam: any) {
-    this.itemDoc = this.afs.doc(`subjects/${exam.uid}`);
+    this.itemDoc = this.afs.doc(`exams/${exam.uid}`);
     this.itemDoc.update(exam);
   }
 

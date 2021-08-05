@@ -1,9 +1,11 @@
 import { KeyValue } from '@angular/common';
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { groupExamsBySubjectNames } from 'src/app/helpers/exams';
@@ -19,9 +21,12 @@ import { ExamService } from 'src/app/protected/services/exam.service';
 export class ExamsTableComponent implements OnInit, OnChanges {
   @Input() teacher: User | null = null;
   @Input() title: string = 'examenes';
+  @Output() onSelectExam: EventEmitter<Exam>;
   public examList: any | null = null;
 
-  constructor(private examService: ExamService) {}
+  constructor(private examService: ExamService) {
+    this.onSelectExam = new EventEmitter<Exam>();
+  }
 
   ngOnInit(): void {}
 
@@ -37,6 +42,10 @@ export class ExamsTableComponent implements OnInit, OnChanges {
         this.examList = groupExamsBySubjectName;
       });
     }
+  }
+
+  selectExam(selectedExam: Exam) {
+    this.onSelectExam.emit(selectedExam);
   }
 
   originalOrder = (a: KeyValue<any, any>, b: KeyValue<any, any>): any => {
