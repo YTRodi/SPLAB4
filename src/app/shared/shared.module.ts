@@ -16,6 +16,7 @@ import { EmptyCardComponent } from './components/cards/empty-card/empty-card.com
 import { DeletedUsersTableComponent } from './components/tables/deleted-users-table/deleted-users-table.component';
 import { ExamFormComponent } from './components/forms/exam-form/exam-form.component';
 import { ExamsTableComponent } from './components/tables/exams-table/exams-table.component';
+import { ScorePipe } from './pipes/score.pipe';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ExamsTableComponent } from './components/tables/exams-table/exams-table
     DeletedUsersTableComponent,
     ExamFormComponent,
     ExamsTableComponent,
+    ScorePipe,
   ],
   imports: [CommonModule, ReactiveFormsModule, AuthRoutingModule],
   exports: [

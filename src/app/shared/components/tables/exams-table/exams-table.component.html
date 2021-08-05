@@ -41,7 +41,7 @@
         "
         *ngFor="let exam of groupExamBySubjectName.value"
       >
-        <div class="d-flex d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-center align-items-center">
           <img
             class="me-3 rounded-circle"
             [src]="exam.student.photo"
@@ -51,8 +51,21 @@
           />
 
           <div>
+            <span>
+              Nota: {{ exam.score }} -
+              <span
+                class="badge rounded-pill bg-success"
+                [ngClass]="{
+                  'bg-danger': exam.score >= 1 && exam.score < 4,
+                  'bg-warning': exam.score >= 4 && exam.score < 6
+                }"
+              >
+                {{ exam.score | score }}
+              </span>
+            </span>
+            <br />
+
             <small class="text-muted">UID {{ exam.student.uid }}</small>
-            <h6 class="my-0">Nota: {{ exam.score }}</h6>
             <h6 class="my-0">{{ exam.student.email }}</h6>
           </div>
         </div>
