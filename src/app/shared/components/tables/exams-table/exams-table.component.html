@@ -1,0 +1,62 @@
+<app-spinner
+  [isLoading]="!this.examList"
+  [text]="'Cargando lista de examenes'"
+></app-spinner>
+
+<h6 class="text-center" *ngIf="this.examList && this.checkEmptyExamList()">
+  El profesor {{ this.teacher?.email }} no tiene exámenes
+</h6>
+
+<div
+  class="mb-3 animate__animated animate__fadeIn"
+  *ngIf="this.checkExamList()"
+>
+  <h4 class="d-flex justify-content-between align-items-center mb-3">
+    <span class="text-primary">Lista de {{ this.title }}</span>
+    <span class="badge bg-primary rounded-pill">
+      {{ this.checkExamListGrouped() }}
+    </span>
+  </h4>
+
+  <div class="overflow-auto fullTableHeight">
+    <ul
+      class="list-group"
+      *ngFor="
+        let groupExamBySubjectName of this.examList
+          | keyvalue: this.originalOrder
+      "
+    >
+      <div class="text-center my-2">
+        <span>{{ groupExamBySubjectName.key }}</span>
+      </div>
+
+      <li
+        class="
+          list-group-item
+          d-flex
+          justify-content-between
+          align-items-center
+          rounded
+          item
+        "
+        *ngFor="let exam of groupExamBySubjectName.value"
+      >
+        <div class="d-flex d-flex justify-content-center align-items-center">
+          <img
+            class="me-3 rounded-circle"
+            [src]="exam.student.photo"
+            alt="User image"
+            width="55"
+            height="55"
+          />
+
+          <div>
+            <small class="text-muted">UID {{ exam.student.uid }}</small>
+            <h6 class="my-0">Nota: {{ exam.score }}</h6>
+            <h6 class="my-0">{{ exam.student.email }}</h6>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

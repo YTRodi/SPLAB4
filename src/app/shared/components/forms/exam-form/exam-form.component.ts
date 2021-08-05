@@ -12,6 +12,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { successNotification } from 'src/app/helpers/notifications';
 import { Exam } from 'src/app/interfaces/exam.interface';
 import { Subject } from 'src/app/interfaces/subject.interface';
 import { User } from 'src/app/interfaces/user.interface';
@@ -68,7 +69,7 @@ export class ExamFormComponent implements OnInit, OnChanges {
     return '';
   }
 
-  sendExam() {
+  async sendExam() {
     const { date, score } = this.examForm.getRawValue();
 
     const parsedDate = new Date(date).toISOString();
@@ -79,11 +80,14 @@ export class ExamFormComponent implements OnInit, OnChanges {
       score,
     };
 
-    console.log(`exam`, exam);
-    this.examService.addExam(exam);
+    await this.examService.addExam(exam);
 
-    // TODO: falta cartel de success
+    successNotification({
+      title: 'Estado del examen',
+      text: 'Se cargó la nota del examen con éxito!',
+    });
 
-    // console.log({ date, student, score });
+    this.examForm.reset();
+    this.selectedStudent = null;
   }
 }

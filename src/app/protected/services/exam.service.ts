@@ -55,10 +55,10 @@ export class ExamService {
   //     );
   // }
 
-  public getAllExamsByTeacher(user: User): Observable<any[]> {
+  public getAllExamsByTeacher(teacher: User): Observable<any[]> {
     return this.afs
       .collection(this.nameCollectionDB, (ref) =>
-        ref.where('subject.teacher.email', '==', user.email)
+        ref.where('subject.teacher.email', '==', teacher.email)
       )
       .snapshotChanges()
       .pipe(

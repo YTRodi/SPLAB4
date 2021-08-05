@@ -21,6 +21,7 @@ import { StudentInscriptionToSubjectScreenComponent } from './screen/student/stu
 import { MySubjectsScreenComponent } from './screen/student/my-subjects-screen/my-subjects-screen.component';
 import { MySubjectsInChargeScreenComponent } from './screen/teacher/my-subjects-in-charge-screen/my-subjects-in-charge-screen.component';
 import { DeletedUsersComponent } from './screen/admin/deleted-users/deleted-users.component';
+import { ExamsComponent } from './screen/teacher/exams/exams.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { DeletedUsersComponent } from './screen/admin/deleted-users/deleted-user
     MySubjectsScreenComponent,
     MySubjectsInChargeScreenComponent,
     DeletedUsersComponent,
+    ExamsComponent,
   ],
   imports: [CommonModule, ProtectedRoutingModule, SharedModule],
 })

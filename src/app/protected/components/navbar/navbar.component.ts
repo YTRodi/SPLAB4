@@ -29,6 +29,7 @@ export class NavbarComponent implements OnInit {
 
   public navTeacher: Nav[] = [
     { to: '/teacher/my-subjects-in-charge', routeName: 'Materias a cargo' },
+    { to: '/teacher/exams', routeName: 'Examenes' },
   ];
 
   public navAdmin: Nav[] = [

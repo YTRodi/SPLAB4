@@ -18,6 +18,7 @@ import { MySubjectsScreenComponent } from './screen/student/my-subjects-screen/m
 
 // TEACHER
 import { MySubjectsInChargeScreenComponent } from './screen/teacher/my-subjects-in-charge-screen/my-subjects-in-charge-screen.component';
+import { ExamsComponent } from './screen/teacher/exams/exams.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,7 @@ const routes: Routes = [
             path: 'my-subjects-in-charge',
             component: MySubjectsInChargeScreenComponent,
           },
+          { path: 'exams', component: ExamsComponent },
         ],
       },
     ],
