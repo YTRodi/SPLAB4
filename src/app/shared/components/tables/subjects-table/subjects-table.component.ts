@@ -74,6 +74,7 @@ export class SubjectsTableComponent implements OnInit, OnChanges {
       );
 
       return result.subscribe((subjects: Subject[]) => {
+        console.log('entro');
         this.subjectsList = subjects;
       });
     }

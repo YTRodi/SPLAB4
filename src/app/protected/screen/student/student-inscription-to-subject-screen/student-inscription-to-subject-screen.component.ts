@@ -17,7 +17,6 @@ export class StudentInscriptionToSubjectScreenComponent implements OnInit {
   async ngOnInit(): Promise<any> {
     const { currentUserFromDB } = await this.authService.getCurrentUser();
     this.currentUserFromDB = currentUserFromDB;
-    console.log(`this.currentUserFromDB`, this.currentUserFromDB);
   }
 
   setSelectedSubject(subject: Subject) {

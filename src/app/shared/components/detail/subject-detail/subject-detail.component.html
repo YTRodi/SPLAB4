@@ -57,7 +57,7 @@
           class="form-control"
           type="text"
           disabled
-          [value]="this.selectedSubject?.quarter"
+          [value]="this.selectedSubject?.quarter! | quarter"
         />
       </div>
     </div>

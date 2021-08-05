@@ -68,7 +68,7 @@
       >
         <!-- Student -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="this.isStudent">
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a
               class="nav-link"
               [routerLink]="['/dashboard']"
@@ -76,7 +76,7 @@
             >
               Dashboard
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-item" *ngFor="let navPatient of this.navStudent">
             <a
@@ -91,7 +91,7 @@
 
         <!-- Teacher -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="this.isTeacher">
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a
               class="nav-link"
               [routerLink]="['/dashboard']"
@@ -99,7 +99,7 @@
             >
               Dashboard
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-item" *ngFor="let navSpecialist of this.navTeacher">
             <a
@@ -114,7 +114,7 @@
 
         <!-- Admin -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="this.isAdmin">
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a
               class="nav-link"
               [routerLink]="['/dashboard']"
@@ -122,7 +122,7 @@
             >
               Dashboard
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-item" *ngFor="let navAdmin of this.navAdmin">
             <a

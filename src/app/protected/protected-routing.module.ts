@@ -38,6 +38,7 @@ const routes: Routes = [
           { path: 'list-of-subjects', component: ListSubjectsComponent },
           { path: 'list-of-users', component: ListUsersComponent },
           { path: 'list-of-deleted-users', component: DeletedUsersComponent },
+          { path: '**', redirectTo: 'users' },
         ],
       },
       {
@@ -48,6 +49,7 @@ const routes: Routes = [
             component: StudentInscriptionToSubjectScreenComponent,
           },
           { path: 'my-subjects', component: MySubjectsScreenComponent },
+          { path: '**', redirectTo: 'incription-to-subject' },
         ],
       },
       {
@@ -58,11 +60,12 @@ const routes: Routes = [
             component: MySubjectsInChargeScreenComponent,
           },
           { path: 'exams', component: ExamsComponent },
+          { path: '**', redirectTo: 'my-subjects-in-charge' },
         ],
       },
     ],
   },
-  { path: '**', redirectTo: 'dashboard' },
+  // { path: '**', redirectTo: 'dashboard' },
 ];
 
 @NgModule({

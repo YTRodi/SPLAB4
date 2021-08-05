@@ -139,11 +139,17 @@ export class RegisterFormComponent implements OnInit {
         });
       }
 
-      if (!this.isAdminRegister) {
-        this.router.navigate(['dashboard']);
-      }
-
       this.registerForm.reset();
+
+      if (!this.isAdminRegister) {
+        switch (type) {
+          case Types.STUDENT:
+            return this.router.navigate(['/student/incription-to-subject']);
+
+          case Types.TEACHER:
+            return this.router.navigate(['/teacher/my-subjects-in-charge']);
+        }
+      }
     } catch (error) {
       errorNotification({ text: error.message });
     }

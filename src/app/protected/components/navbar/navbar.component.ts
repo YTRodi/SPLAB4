@@ -58,6 +58,8 @@ export class NavbarComponent implements OnInit {
     this.currentUser = currentUser;
     this.currentUserFromDB = currentUserFromDB;
 
+    console.log(`this.currentUserFromDB`, this.currentUserFromDB);
+
     this.isStudent = this.currentUserFromDB.type === Types.STUDENT;
     this.isTeacher = this.currentUserFromDB.type === Types.TEACHER;
     this.isAdmin = this.currentUserFromDB.type === Types.ADMIN;

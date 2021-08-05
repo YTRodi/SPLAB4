@@ -89,12 +89,12 @@ export class UserService {
     this.itemDoc.update(user);
   }
 
-  public preAddAndUploadImage(
+  public async preAddAndUploadImage(
     user: any,
     folder: FolderImages,
     images: File[]
   ): Promise<any> {
-    return this.uploadImage(user, folder, images);
+    return await this.uploadImage(user, folder, images);
   }
 
   public addUser(user: User) {
@@ -110,7 +110,7 @@ export class UserService {
 
     const fileRef = this.storage.ref(this.filePath);
     const task = this.storage.upload(this.filePath, images[0]);
-    task
+    return task
       .snapshotChanges()
       .pipe(
         finalize(() => {

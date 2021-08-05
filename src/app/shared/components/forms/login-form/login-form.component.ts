@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Types } from 'src/app/constants/types';
 import { errorNotification } from 'src/app/helpers/notifications';
 
 @Component({
@@ -86,8 +87,19 @@ export class LoginFormComponent implements OnInit {
       const { email, password } = this.loginForm.getRawValue();
 
       await this.authService.loginWithEmailAndPassword(email, password);
+      const { currentUserFromDB } = await this.authService.getCurrentUser();
+      console.log(`currentUserFromDB`, currentUserFromDB);
 
-      this.router.navigate(['dashboard']);
+      switch (currentUserFromDB.type) {
+        case Types.ADMIN:
+          return this.router.navigate(['/admin/users']);
+
+        case Types.STUDENT:
+          return this.router.navigate(['/student/incription-to-subject']);
+
+        case Types.TEACHER:
+          return this.router.navigate(['/teacher/my-subjects-in-charge']);
+      }
 
       this.loginForm.reset();
     } catch (error) {
