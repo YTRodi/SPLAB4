@@ -86,6 +86,11 @@
     type="submit"
     [disabled]="this.examForm.invalid"
   >
-    Cargar nota de examen
+    <div *ngIf="this.isLoading">
+      <span class="spinner-border spinner-border-sm"></span>
+      Cargando...
+    </div>
+
+    <span *ngIf="!this.isLoading">Cargar nota de examen</span>
   </button>
 </form>

@@ -35,6 +35,7 @@ export class RegisterFormComponent implements OnInit {
   public registerForm: FormGroup;
   public types = Types;
   private photo: any;
+  public isLoading: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -113,6 +114,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
   async sendForm() {
+    this.isLoading = true;
     try {
       const { email, password, photo, type } = this.registerForm.getRawValue();
       const newUser: User = { email, photo, type, active: true };
@@ -140,6 +142,7 @@ export class RegisterFormComponent implements OnInit {
       }
 
       this.registerForm.reset();
+      this.isLoading = false;
 
       if (!this.isAdminRegister) {
         switch (type) {

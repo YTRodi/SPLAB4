@@ -39,6 +39,7 @@ export class SubjectFormComponent implements OnInit {
   public subjectForm: FormGroup;
   public quarters = Quarters;
   private photo: any;
+  public isLoading: boolean = false;
 
   constructor(private subjectService: SubjectService) {
     this.subjectForm = this.getSubjectForm();
@@ -109,6 +110,7 @@ export class SubjectFormComponent implements OnInit {
   }
 
   async sendForm(): Promise<any> {
+    this.isLoading = true;
     try {
       if (!this.selectedTeacher) {
         return errorNotification({ text: 'No hay un profesor seleccionado' });
@@ -127,6 +129,8 @@ export class SubjectFormComponent implements OnInit {
       this.subjectService.preAddAndUploadImage(newSubject, FolderImages.other, [
         this.photo,
       ]);
+
+      this.isLoading = false;
 
       successNotification({ text: 'La materia fue dada de alta con éxito' });
 

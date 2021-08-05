@@ -55,7 +55,12 @@
       type="submit"
       [disabled]="this.loginForm.invalid"
     >
-      Iniciar sesión
+      <div *ngIf="this.isLoading">
+        <span class="spinner-border spinner-border-sm"></span>
+        Cargando...
+      </div>
+
+      <span *ngIf="!this.isLoading"> Iniciar sesión </span>
     </button>
   </form>
 

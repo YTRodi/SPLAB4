@@ -97,7 +97,12 @@
             type="submit"
             [disabled]="this.updatedExamForm.invalid"
           >
-            Actualizar nota del examen
+            <div *ngIf="this.isLoading">
+              <span class="spinner-border spinner-border-sm"></span>
+              Cargando...
+            </div>
+
+            <span *ngIf="!this.isLoading">Actualizar nota del examen</span>
           </button>
         </form>
       </div>

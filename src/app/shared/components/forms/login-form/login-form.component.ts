@@ -29,6 +29,7 @@ export class LoginFormComponent implements OnInit {
     password: '123456',
   };
   public loginForm: FormGroup;
+  public isLoading: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {
     this.loginForm = new FormBuilder().group({
@@ -83,6 +84,8 @@ export class LoginFormComponent implements OnInit {
   }
 
   async sendForm() {
+    this.isLoading = true;
+
     try {
       const { email, password } = this.loginForm.getRawValue();
 
@@ -102,6 +105,7 @@ export class LoginFormComponent implements OnInit {
       }
 
       this.loginForm.reset();
+      this.isLoading = false;
     } catch (error) {
       errorNotification({ text: error.message });
     }

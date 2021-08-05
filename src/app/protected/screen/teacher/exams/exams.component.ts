@@ -20,6 +20,7 @@ export class ExamsComponent implements OnInit {
   public currentUserFromDB: User | null = null;
   public selectedExam: Exam | null = null;
   public updatedExamForm: FormGroup;
+  public isLoading: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -75,12 +76,13 @@ export class ExamsComponent implements OnInit {
   }
 
   async sendUpdatedExam() {
+    this.isLoading = true;
     const { score } = this.updatedExamForm.getRawValue();
 
     const updatedExam: Exam = { ...this.selectedExam!, score };
 
     await this.examService.updateExamData(updatedExam);
-
+    this.isLoading = false;
     successNotification({
       title: 'Estado del examen',
       text: 'Se actualizó el examen con éxito!',

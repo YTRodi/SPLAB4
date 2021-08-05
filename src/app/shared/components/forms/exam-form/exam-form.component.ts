@@ -27,6 +27,7 @@ export class ExamFormComponent implements OnInit, OnChanges {
   @Input() subject: Subject | null = null;
   public selectedStudent: User | null = null;
   public examForm: FormGroup;
+  public isLoading: boolean = false;
 
   constructor(private examService: ExamService) {
     this.examForm = new FormBuilder().group({
@@ -70,6 +71,7 @@ export class ExamFormComponent implements OnInit, OnChanges {
   }
 
   async sendExam() {
+    this.isLoading = true;
     const { date, score } = this.examForm.getRawValue();
 
     const parsedDate = new Date(date).toISOString();
@@ -81,6 +83,7 @@ export class ExamFormComponent implements OnInit, OnChanges {
     };
 
     await this.examService.addExam(exam);
+    this.isLoading = false;
 
     successNotification({
       title: 'Estado del examen',
