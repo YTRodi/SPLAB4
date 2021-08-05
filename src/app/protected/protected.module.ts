@@ -22,6 +22,7 @@ import { MySubjectsScreenComponent } from './screen/student/my-subjects-screen/m
 import { MySubjectsInChargeScreenComponent } from './screen/teacher/my-subjects-in-charge-screen/my-subjects-in-charge-screen.component';
 import { DeletedUsersComponent } from './screen/admin/deleted-users/deleted-users.component';
 import { ExamsComponent } from './screen/teacher/exams/exams.component';
+import { UserEmailDirective } from './pipes/user-email.directive';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ExamsComponent } from './screen/teacher/exams/exams.component';
     MySubjectsInChargeScreenComponent,
     DeletedUsersComponent,
     ExamsComponent,
+    UserEmailDirective,
   ],
   imports: [CommonModule, ProtectedRoutingModule, SharedModule],
 })

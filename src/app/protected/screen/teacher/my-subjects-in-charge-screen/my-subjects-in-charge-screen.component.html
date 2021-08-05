@@ -10,9 +10,8 @@
         (onSelectSubject)="this.setSelectedSubject($event)"
         [subjectsByTeacherParams]="this.currentUserFromDB"
         data-bs-toggle="modal"
-        data-bs-target="#createExam"
+        data-bs-target="#subjectInfo"
       ></app-subjects-table>
-      <!-- TODO: LUEGO VOLVER ESTO AL LUGAR. data-bs-target="#subjectInfo" -->
     </div>
   </div>
 </div>
@@ -32,6 +31,7 @@
 
       <div class="modal-body">
         <button
+          *ngIf="this.selectedSubject?.students?.length !== 0"
           class="btn btn-outline-primary w-100 mb-2"
           data-bs-dismiss="modal"
           data-bs-toggle="modal"
