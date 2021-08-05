@@ -3,15 +3,72 @@
     <h2>Lista de usuarios</h2>
   </div>
 
+  <div class="row">
+    <div class="py-3 text-center">
+      <h4>Filtros</h4>
+    </div>
+
+    <div class="col text-center">
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="inlineRadioOptions"
+          id="inlineRadio1"
+          value="option1"
+          checked
+          (click)="this.setSelectedFilter('ALL')"
+        />
+        <label class="form-check-label" for="inlineRadio1">Todos</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="inlineRadioOptions"
+          id="inlineRadio2"
+          value="option2"
+          (click)="this.setSelectedFilter('STUDENT')"
+        />
+        <label class="form-check-label" for="inlineRadio2"> Solo alumnos</label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="inlineRadioOptions"
+          id="inlineRadio3"
+          (click)="this.setSelectedFilter('TEACHER')"
+        />
+        <label class="form-check-label" for="inlineRadio3">
+          Solo profesores
+        </label>
+      </div>
+
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="inlineRadioOptions"
+          id="inlineRadio4"
+          (click)="this.setSelectedFilter('ADMIN')"
+        />
+        <label class="form-check-label" for="inlineRadio4">Solo admins</label>
+      </div>
+    </div>
+  </div>
+
   <div class="row mb-3">
     <div class="animate__animated animate__fadeIn">
-      <!-- TODO: Falta filtro por PIPE, puedo ir cambiar el parámetro [filter] con el pipe? -->
       <app-users-table
         [full]="true"
         [isAdmin]="true"
-        [filter]="'ALL'"
+        [filter]="this.selectedFilter"
         [title]="'usuarios'"
       >
+        <!-- [filter]="'ALL'" -->
       </app-users-table>
     </div>
   </div>
